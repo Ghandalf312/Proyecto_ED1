@@ -1,24 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Diego\\Desktop\\URL\\Primer Ciclo 2021\\Estructura de Datos I\\Laboratorio\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj": {}
+    "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Diego\\Desktop\\URL\\Primer Ciclo 2021\\Estructura de Datos I\\Laboratorio\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj": {
+    "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Diego\\Desktop\\URL\\Primer Ciclo 2021\\Estructura de Datos I\\Laboratorio\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj",
+        "projectUniqueName": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj",
         "projectName": "Proyecto_ED1",
-        "projectPath": "C:\\Users\\Diego\\Desktop\\URL\\Primer Ciclo 2021\\Estructura de Datos I\\Laboratorio\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj",
-        "packagesPath": "C:\\Users\\Diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Diego\\Desktop\\URL\\Primer Ciclo 2021\\Estructura de Datos I\\Laboratorio\\Proyecto_ED1\\Proyecto_ED1\\obj\\",
+        "projectPath": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj",
+        "packagesPath": "C:\\Users\\ZeroJChang\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\Proyecto_ED1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\ZeroJChang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -58,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

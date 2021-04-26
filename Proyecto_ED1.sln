@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto_ED1", "Proyecto_ED1\Proyecto_ED1.csproj", "{2B76BF7E-B3F7-4FB7-9962-07B9C9175475}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto_ED1", "Proyecto_ED1\Proyecto_ED1.csproj", "{2B76BF7E-B3F7-4FB7-9962-07B9C9175475}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomGenerics", "CustomGenerics\CustomGenerics.csproj", "{30F065DD-4597-4D21-BEE2-EE3A2F8C2BE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2B76BF7E-B3F7-4FB7-9962-07B9C9175475}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B76BF7E-B3F7-4FB7-9962-07B9C9175475}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B76BF7E-B3F7-4FB7-9962-07B9C9175475}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30F065DD-4597-4D21-BEE2-EE3A2F8C2BE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30F065DD-4597-4D21-BEE2-EE3A2F8C2BE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30F065DD-4597-4D21-BEE2-EE3A2F8C2BE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30F065DD-4597-4D21-BEE2-EE3A2F8C2BE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
