@@ -79,6 +79,59 @@ namespace Proyecto_ED1.Controllers
                     Hospital = newPatient.Hospital
                 };
                 //Agregar al arbol
+
+                if (Singleton.Instance.patientsByName.Buscar(newPatientModel.Name) != null)
+                {
+                    var searchName = Singleton.Instance.repeatedNames.Find(x => x.value == newPatientModel.Name);
+                    if (searchName == null)
+                    {
+                        var newRepeated = new RepeatedModel();
+                        newRepeated.value = newPatient.Name;
+                        newRepeated.numberRepeats++;
+                        Singleton.Instance.repeatedNames.Add(newRepeated);
+                        newPatientModel.NameKey = newPatientModel.Name + newRepeated.numberRepeats.ToString();
+                        Singleton.Instance.patientsByName.Add(newPatientModel, newPatientModel.NameKey);
+                    }
+                    else
+                    {
+                        searchName.numberRepeats++;
+                        newPatientModel.NameKey = newPatientModel.Name + searchName.numberRepeats.ToString();
+                        Singleton.Instance.patientsByName.Add(newPatientModel, newPatientModel.NameKey);
+                    }
+                }
+                else
+                {
+                    newPatientModel.NameKey = newPatientModel.Name;
+                    Singleton.Instance.patientsByName.Add(newPatientModel, newPatientModel.Name);
+                }
+
+
+                if (Singleton.Instance.patientsByLastName.Buscar(newPatientModel.LastName) != null)
+                {
+                    var searchName = Singleton.Instance.repeatedLastNames.Find(x => x.value == newPatientModel.LastName);
+                    if (searchName == null)
+                    {
+                        var newRepeated = new RepeatedModel();
+                        newRepeated.value = newPatient.LastName;
+                        newRepeated.numberRepeats++;
+                        Singleton.Instance.repeatedLastNames.Add(newRepeated);
+                        newPatientModel.LastNameKey = newPatientModel.LastName + newRepeated.numberRepeats.ToString();
+                        Singleton.Instance.patientsByLastName.Add(newPatientModel, newPatientModel.LastNameKey);
+                    }
+                    else
+                    {
+                        searchName.numberRepeats++;
+                        newPatientModel.LastNameKey = newPatientModel.LastName + searchName.numberRepeats.ToString();
+                        Singleton.Instance.patientsByLastName.Add(newPatientModel, newPatientModel.LastNameKey);
+                    }
+                }
+                else
+                {
+                    newPatientModel.LastNameKey = newPatientModel.LastName;
+                    Singleton.Instance.patientsByLastName.Add(newPatientModel, newPatientModel.LastName);
+                }
+
+                Singleton.Instance.patientsByDPI.Add(newPatientModel, newPatientModel.DPI);
                 Singleton.Instance.patientsHash.Insert(newPatient, newPatient.DPI);
                 return RedirectToAction("Index");
             }

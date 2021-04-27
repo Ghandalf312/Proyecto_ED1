@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CustomGenerics.Estructuras
 {
-    public class Hash<T> where T : IComparable
+    public class Hash<T> where T : IComparable<T>
     {
         /// <summary>
         /// Variable declaration

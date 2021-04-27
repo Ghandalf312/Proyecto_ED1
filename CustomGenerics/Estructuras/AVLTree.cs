@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
 using CustomGenerics.Interfaces;
-
 namespace CustomGenerics.Estructuras
 {
-    public class Arbol<T, K> : NonLinearDataStructureBase<T, K> where T : IComparable<T> where K : IComparable<K>
+    public class AVLTree<T, K> : NonLinearDataStructureBase<T, K> where T : IComparable<T> where K : IComparable<K>
     {
-        private NodoA<T, K> Raiz = new NodoA<T, K>();
-        private NodoA<T, K> temp = new NodoA<T, K>();
+        private NodeA<T, K> Raiz = new NodeA<T, K>();
+        private NodeA<T, K> temp = new NodeA<T, K>();
         private List<T> listaOrdenada = new List<T>();
         private List<T> ListaBusqueda = new List<T>();
 
@@ -25,7 +22,7 @@ namespace CustomGenerics.Estructuras
         }
         public void Remove(K deleted)
         {
-            NodoA<T, K> busc = new NodoA<T, K>();
+            NodeA<T, K> busc = new NodeA<T, K>();
             busc = Get(Raiz, deleted);
             if (busc != null)
             {
@@ -35,7 +32,7 @@ namespace CustomGenerics.Estructuras
         }
         public T Buscar(K buscado)
         {
-            NodoA<T, K> busc = new NodoA<T, K>();
+            NodeA<T, K> busc = new NodeA<T, K>();
             busc = Get(Raiz, buscado);
             if (busc != null)
             {
@@ -64,7 +61,7 @@ namespace CustomGenerics.Estructuras
         }
 
         // tres casos para eliminacion
-        protected override void Delete(NodoA<T, K> nodo)
+        protected override void Delete(NodeA<T, K> nodo)
         {
             if (nodo.Izquierdo.Valor == null && nodo.Derecho.Valor == null) // Caso 1
             {
@@ -94,7 +91,7 @@ namespace CustomGenerics.Estructuras
             BalanceoPost(Raiz);
         }
         // Metodo ayuda para el caso 3 de eliminacion
-        private NodoA<T, K> Derecha(NodoA<T, K> nodo)
+        private NodeA<T, K> Derecha(NodeA<T, K> nodo)
         {
             if (nodo.Derecho.Valor == null)
             {
@@ -104,7 +101,7 @@ namespace CustomGenerics.Estructuras
                 }
                 else
                 {
-                    NodoA<T, K> temporal = new NodoA<T, K>();
+                    NodeA<T, K> temporal = new NodeA<T, K>();
                     temporal.Valor = nodo.Valor;
                     temporal.Llave = nodo.Llave;
                     nodo.Valor = nodo.Derecho.Valor;
@@ -118,7 +115,7 @@ namespace CustomGenerics.Estructuras
         }
 
         // Busqueda recursiva de un valor dentro del arbol por llave del valor
-        protected override NodoA<T, K> Get(NodoA<T, K> nodo, K value)
+        protected override NodeA<T, K> Get(NodeA<T, K> nodo, K value)
         {
             if (value.CompareTo(nodo.Llave) == 0)
             {
@@ -150,7 +147,7 @@ namespace CustomGenerics.Estructuras
 
         // Metodo recursivo para incertar segun orden alfabetico
 
-        protected override NodoA<T, K> Insert(NodoA<T, K> nodo, T value, K key)
+        protected override NodeA<T, K> Insert(NodeA<T, K> nodo, T value, K key)
         {
             try
             {
@@ -158,8 +155,8 @@ namespace CustomGenerics.Estructuras
                 {
                     nodo.Valor = value;
                     nodo.Llave = key;
-                    nodo.Derecho = new NodoA<T, K>();
-                    nodo.Izquierdo = new NodoA<T, K>();
+                    nodo.Derecho = new NodeA<T, K>();
+                    nodo.Izquierdo = new NodeA<T, K>();
                 }
                 else if (key.CompareTo(nodo.Llave) == -1)
                 {
@@ -180,7 +177,7 @@ namespace CustomGenerics.Estructuras
         }
 
         // Recorre la lista en orden y agrega los valores a la listaOrdenada
-        private void InOrder(NodoA<T, K> nodo)
+        private void InOrder(NodeA<T, K> nodo)
         {
             if (nodo.Valor != null)
             {
@@ -189,7 +186,7 @@ namespace CustomGenerics.Estructuras
                 InOrder(nodo.Derecho);
             }
         }
-        private void PostOrder(NodoA<T, K> nodo)
+        private void PostOrder(NodeA<T, K> nodo)
         {
             if (nodo.Valor != null)
             {
@@ -198,7 +195,7 @@ namespace CustomGenerics.Estructuras
                 listaOrdenada.Add(nodo.Valor);
             }
         }
-        private void PreOrder(NodoA<T, K> nodo)
+        private void PreOrder(NodeA<T, K> nodo)
         {
             if (nodo.Valor != null)
             {
@@ -207,7 +204,7 @@ namespace CustomGenerics.Estructuras
                 PreOrder(nodo.Derecho);
             }
         }
-        private void BalanceoPost(NodoA<T, K> nodo)
+        private void BalanceoPost(NodeA<T, K> nodo)
         {
             if (nodo.Valor != null)
             {
@@ -218,7 +215,7 @@ namespace CustomGenerics.Estructuras
         }
 
 
-        private int getHeight(NodoA<T, K> node)
+        private int getHeight(NodeA<T, K> node)
         {
             if (node.Valor == null) return -1;
             var IzquierdoH = getHeight(node.Izquierdo);
@@ -226,7 +223,7 @@ namespace CustomGenerics.Estructuras
             return Math.Max(IzquierdoH, rightH) + 1;
         }
 
-        private int FactorEquilibrio(NodoA<T, K> nodoActual)
+        private int FactorEquilibrio(NodeA<T, K> nodoActual)
         {
             int iz = getHeight(nodoActual.Izquierdo);
             int der = getHeight(nodoActual.Derecho);
@@ -234,7 +231,7 @@ namespace CustomGenerics.Estructuras
             return FactorE;
         }
 
-        private NodoA<T, K> Balancear(NodoA<T, K> nodoActual)
+        private NodeA<T, K> Balancear(NodeA<T, K> nodoActual)
         {
             int factorE = FactorEquilibrio(nodoActual);
             if (factorE > 1)
@@ -262,9 +259,9 @@ namespace CustomGenerics.Estructuras
             return nodoActual;
         }
 
-        private NodoA<T, K> RotacionIzq(NodoA<T, K> nodoActual)
+        private NodeA<T, K> RotacionIzq(NodeA<T, K> nodoActual)
         {
-            var temp = new NodoA<T, K>
+            var temp = new NodeA<T, K>
             {
                 Valor = nodoActual.Derecho.Valor,
                 Llave = nodoActual.Derecho.Llave,
@@ -280,9 +277,9 @@ namespace CustomGenerics.Estructuras
             }
             return temp;
         }
-        private NodoA<T, K> RotacionDer(NodoA<T, K> nodoActual)
+        private NodeA<T, K> RotacionDer(NodeA<T, K> nodoActual)
         {
-            var temp = new NodoA<T, K>
+            var temp = new NodeA<T, K>
             {
                 Valor = nodoActual.Izquierdo.Valor,
                 Llave = nodoActual.Izquierdo.Llave,
@@ -298,9 +295,9 @@ namespace CustomGenerics.Estructuras
             }
             return temp;
         }
-        private NodoA<T, K> RotacionDobDer(NodoA<T, K> nodoActual)
+        private NodeA<T, K> RotacionDobDer(NodeA<T, K> nodoActual)
         {
-            var temp = new NodoA<T, K>
+            var temp = new NodeA<T, K>
             {
                 Valor = nodoActual.Izquierdo.Valor,
                 Llave = nodoActual.Izquierdo.Llave,
@@ -310,9 +307,9 @@ namespace CustomGenerics.Estructuras
             nodoActual.Izquierdo = RotacionIzq(temp);
             return RotacionDer(nodoActual);
         }
-        private NodoA<T, K> RotacionDobIzq(NodoA<T, K> nodoActual)
+        private NodeA<T, K> RotacionDobIzq(NodeA<T, K> nodoActual)
         {
-            var temp = new NodoA<T, K>
+            var temp = new NodeA<T, K>
             {
                 Valor = nodoActual.Derecho.Valor,
                 Llave = nodoActual.Derecho.Llave,

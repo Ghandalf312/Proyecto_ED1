@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace Proyecto_ED1.Models
 {
-    public class PatientModel : IComparable
+    public class PatientModel : IComparable<PatientModel>
     {
         /// <summary>
         /// Declaracion de variables
         /// </summary>
         [Display(Name = "Nombre")]
         public string Name { get; set; }
+        public string NameKey { get; set; }
         [Display(Name = "Apellido")]
         public string LastName { get; set; }
+        public string LastNameKey { get; set; }
         public string DPI { get; set; }
         public int Priority { get; set; }
         public int Age { get; set; }
         public string Hospital { get; set; }
-        public int CompareTo(object obj)
+        public int CompareTo(PatientModel obj)
         {
             if (obj == null)
             {
@@ -27,7 +29,7 @@ namespace Proyecto_ED1.Models
             }
             else
             {
-                return this.DPI.CompareTo(((PatientModel)obj).DPI);
+                return this.DPI.CompareTo(obj);
             }
         }
         /// <summary>

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CustomGenerics.Estructuras
 {
-    public class HashNode<T> where T : IComparable
+    public class HashNode<T> where T : IComparable<T>
     {
         public HashNode<T> Previous { get; set; }
         public HashNode<T> Next { get; set; }

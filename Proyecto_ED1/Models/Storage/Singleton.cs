@@ -19,6 +19,11 @@ namespace Proyecto_ED1.Models.Storage
             }
         }
 
-        public Hash<PatientExtModel> patientsHash = new Hash<PatientExtModel>(150);
+        public Hash<PatientExtModel> patientsHash = new Hash<PatientExtModel>(100);
+        public AVLTree<PatientModel, string> patientsByName = new AVLTree<PatientModel, string>();
+        public List<RepeatedModel> repeatedNames = new List<RepeatedModel>();
+        public AVLTree<PatientModel, string> patientsByLastName = new AVLTree<PatientModel, string>();
+        public List<RepeatedModel> repeatedLastNames = new List<RepeatedModel>();
+        public AVLTree<PatientModel, string> patientsByDPI = new AVLTree<PatientModel, string>();
     }
 }
