@@ -5,7 +5,7 @@ using CustomGenerics.Interfaces;
 
 namespace CustomGenerics.Estructuras
 {
-    public class ArbolBinario<T> : NonLinearDataStructureBase<T> where T : IComparable<T>
+    public class Arbol<T> : NonLinearDataStructureBase<T> where T : IComparable<T>
     {
         private Nodo<T> Raiz = new Nodo<T>();
         private Nodo<T> temp = new Nodo<T>();

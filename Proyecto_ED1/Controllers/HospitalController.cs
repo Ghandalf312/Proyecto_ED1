@@ -1,0 +1,111 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using CustomGenerics.Estructuras;
+using Proyecto_ED1.Models;
+using Proyecto_ED1.Models.Storage;
+
+namespace Proyecto_ED1.Controllers
+{
+    public class HospitalController : Controller
+    {
+        #region Metodos GET
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult Registro()
+        {
+            return View();
+        }
+
+        #endregion
+
+        #region Metodos HTTPOST
+        [HttpPost]
+        public ActionResult Index(IFormCollection collection)
+        {
+            var option = collection["Option"];
+            switch (option)
+            {
+                case "Registro":
+                    return RedirectToAction("Registro");
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Registro(IFormCollection collection)
+        {
+            try
+            {
+                if (HasIncorrectCharacter(collection["Name"]) || HasIncorrectCharacter(collection["LastName"]) || HasIncorrectCharacter(collection["Municipality"]))
+                {
+                    ModelState.AddModelError("Name", "Por favor, ingrese datos no numericos en los campos pertenecientes.");
+                    return View("Registro");
+                }
+                if (int.Parse(collection["Age"]) < 0 || int.Parse(collection["Age"]) > 120)
+                {
+                    ModelState.AddModelError("Age", "Por favor, una edad valida.");
+                    return View("Registro");
+                }
+                foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
+                {
+                    if (patient.Value.DPI == collection["DPI"])
+                    {
+                        ModelState.AddModelError("DPI", "Un paciente con el mismo DPI ya ha sido ingresado en el sistema. Ingrese otro paciente.");
+                        return View("Registro");
+                    }
+                }
+                var newPatient = new PatientExtModel()
+                {
+                    Name = collection["Name"],
+                    LastName = collection["LastName"],
+                    DPI = collection["DPI"],
+                    Age = int.Parse(collection["Age"]),
+                    Department = collection["Department"],
+                    Municipality = collection["Municipality"],
+                    Hospital = collection["Hospital"] //pendiente metodo para tener el hospital
+                };
+                newPatient.PriorityAssignment();
+                var newPatientModel = new PatientModel
+                {
+                    Name = newPatient.Name,
+                    LastName = newPatient.LastName,
+                    DPI = newPatient.DPI,
+                    Priority = newPatient.Priority,
+                    Hospital = newPatient.Hospital
+                };
+                //Agregar al arbol
+                Singleton.Instance.patientsHash.Insert(newPatient, newPatient.DPI);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                ModelState.AddModelError("Department", "Por favor, asegurese de haber llenado todo los campos correctamente.");
+            }
+            return View();
+        }
+
+        /// <summary>
+        /// Si el string tiene un numero, retorna verdadero, si no, retorna falso.
+        /// </summary>
+        /// <param name="data"></param> representa el input que ingreso el usuario.
+        /// <returns></returns>
+        public bool HasIncorrectCharacter(string data)
+        {
+            try
+            {
+                var num = int.Parse(data);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        #endregion
+    }
+}
