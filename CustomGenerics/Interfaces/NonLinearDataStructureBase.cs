@@ -8,10 +8,10 @@ using CustomGenerics.Estructuras;
 
 namespace CustomGenerics.Interfaces
 {
-    public abstract class NonLinearDataStructureBase<T> where T : IComparable<T>
+    public abstract class NonLinearDataStructureBase<T, K> where T : IComparable<T> where K : IComparable<K>
     {
-        protected abstract Nodo<T> Insert(Nodo<T> nodo, T value);
-        protected abstract void Delete(Nodo<T> nodo);
-        protected abstract Nodo<T> Get(Nodo<T> nodo, T value);
+        protected abstract NodoA<T, K> Insert(NodoA<T, K> nodo, T value, K key);
+        protected abstract void Delete(NodoA<T, K> nodo);
+        protected abstract NodoA<T, K> Get(NodoA<T, K> nodo, K value);
     }
 }

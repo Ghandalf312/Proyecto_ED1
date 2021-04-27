@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
 using CustomGenerics.Interfaces;
-
 namespace CustomGenerics.Estructuras
 {
-    public class Arbol<T, K> : NonLinearDataStructureBase<T, K> where T : IComparable<T> where K : IComparable<K>
+    public class ArbolAVL<T, K> : NonLinearDataStructureBase<T, K> where T : IComparable<T> where K : IComparable<K>
     {
         private NodoA<T, K> Raiz = new NodoA<T, K>();
         private NodoA<T, K> temp = new NodoA<T, K>();
