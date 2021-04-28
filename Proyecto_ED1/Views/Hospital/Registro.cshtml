@@ -38,8 +38,26 @@
                     <select class="form-control" id="Department" name="Department">
                         <option>Seleccionar Departamento</option>
 
+                        <option>Alta Verapaz</option>
+                        <option>Baja Verapaz</option>
+                        <option>Chiquimula</option>
+                        <option>Petén</option>
+                        <option>El Progreso</option>
+                        <option>Quiché</option>
+                        <option>Escuintla</option>
                         <option>Guatemala</option>
+                        <option>Huehuetenango</option>
                         <option>Izabal</option>
+                        <option>Jalapa</option>
+                        <option>Jutiapa</option>
+                        <option>Quetzaltenango</option>
+                        <option>Retalhuleu</option>
+                        <option>Sacatepéquez</option>
+                        <option>San Marcos</option>
+                        <option>Santa Rosa</option>
+                        <option>Sololá</option>
+                        <option>Suchitepequez</option>
+                        <option>Totonicapán</option>
                         <option>Zacapa</option>
                     </select>
                 </div>
@@ -52,29 +70,13 @@
                 <span asp-validation-for="Municipality" class="text-danger"></span>
             </div>
 
-            <div class="form-check form-check-inline">
-                
-                @Html.RadioButton("Priority", "3") 18-35
-            </div>
-            <div class="form-check form-check-inline">
-                @Html.RadioButton("Priority", "2") 36-50
-            </div>
-            <div class="form-check form-check-inline">
-                @Html.RadioButton("Priority", "1") 50+
-            </div>
-            <span asp-validation-for="Age" class="text-danger"></span>
+          
 
-
-
-
-
-
-
-            @*<div class="form-group">
+            <div class="form-group">
                 <label asp-for="Age" class="control-label"></label>
                 <input asp-for="Age" class="form-control" />
                 <span asp-validation-for="Age" class="text-danger"></span>
-            </div>*@
+            </div>
             @*<div class="form-group">
             <label asp-for="Hospital" class="control-label"></label>
             <input asp-for="Hospital" class="form-control" />

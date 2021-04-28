@@ -75,7 +75,7 @@ namespace Proyecto_ED1.Controllers
                 else if (collection["Department"] == "Seleccionar Departamento")
                 {
                     ModelState.AddModelError("Department", "Por favor seleccione un departamento");
-                    return View("NewCase");
+                    return View("Registro");
                 }
                 foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
                 {
@@ -93,9 +93,10 @@ namespace Proyecto_ED1.Controllers
                     Age = int.Parse(collection["Age"]),
                     Department = collection["Department"],
                     Municipality = collection["Municipality"],
+
                    
                 };
-                
+
                 var newPatientModel = new PatientExtModel
                 {
                     Name = newPatient.Name,
@@ -103,16 +104,18 @@ namespace Proyecto_ED1.Controllers
                     NameKey = newPatient.Name,
                     LastNameKey = newPatient.LastName,
                     DPI = newPatient.DPI,
-                  
+                    Age = newPatient.Age,
+                    Department = newPatient.Department,
+                    Municipality = newPatient.Municipality,
+                    Hospital = GetHospital(collection["Department"])
                 
                 };
                 newPatientModel.PriorityAssignment();
-                newPatientModel.HospitalAssigment();
-                
+             
 
 
 
-
+            
 
 
                 //Agregar al arbol
@@ -200,9 +203,9 @@ namespace Proyecto_ED1.Controllers
 
         private void LoadHospitalsByDepartment()
         {
+            AddHospital("Alta Verapaz");
             AddHospital("Guatemala");
-            AddHospital("Izabal");
-            AddHospital("Zacapa");
+            AddHospital("Totonicapán");
 
         }
 
@@ -219,7 +222,23 @@ namespace Proyecto_ED1.Controllers
             Singleton.Instance.Hospitals.Add(newHospital);
         }
 
+        private string GetHospital(string department)
+        {
+            foreach (var hospital in Singleton.Instance.Hospitals)
+            {
+                if (hospital.Departments.Contains(department))
+                {
+                    return hospital.HospitalName;
+                }
+            }
+            return null;
+        }
+
+
+
+
     }
+
 
 
 }
