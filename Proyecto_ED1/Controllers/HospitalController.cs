@@ -47,13 +47,13 @@ namespace Proyecto_ED1.Controllers
                 case "Registro":
                     return RedirectToAction("Registro");
                 case "Busqueda":
-                    return RedirectToAction("Registro");
+                    return RedirectToAction("Busqueda");
                 case "Lista espera":
-                    return RedirectToAction("Registro");
+                    return RedirectToAction("Listaespera");
                 case "Hospitales":
-                    return RedirectToAction("Registro");
+                    return RedirectToAction("Hospitales");
                 case "% vacunados":
-                    return RedirectToAction("Registro");
+                    return RedirectToAction("Vacunados");
             }
             return View();
         }
@@ -71,6 +71,11 @@ namespace Proyecto_ED1.Controllers
                 {
                     ModelState.AddModelError("Age", "Por favor, una edad valida.");
                     return View("Registro");
+                }
+                else if (collection["Department"] == "Seleccionar Departamento")
+                {
+                    ModelState.AddModelError("Department", "Por favor seleccione un departamento");
+                    return View("NewCase");
                 }
                 foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
                 {
@@ -169,7 +174,7 @@ namespace Proyecto_ED1.Controllers
             }
             catch
             {
-                ModelState.AddModelError("Department", "Por favor, asegurese de haber llenado todo los campos correctamente.");
+                ModelState.AddModelError("Municipality", "Por favor, asegurese de haber llenado todo los campos correctamente.");
             }
             return View();
         }
