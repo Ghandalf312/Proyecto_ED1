@@ -1,20 +1,36 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@{ ViewBag.Title = "Index"; }
 
-<h1>Escoja su municipio</h1>
+@* Changes Layout for Index view, hides the Menu button at the top *@
+@{ Layout = "_Layout"; }
 
-<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-    <ul class="navbar-nav flex-grow-1">
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Zacapa</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Izabal</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Hospital" asp-action="Registro">Guatemala</a>
-        </li>
-    </ul>
+&nbsp;
+<br />
+
+<h2 style="text-align: center">Atención en Hospital - Caso <strong><em>COVID-19</em></strong></h2>
+
+<br />
+
+
+@using (Html.BeginForm("Index", "Hospital", FormMethod.Post))
+{
+
+<br />
+<div style="text-align: center">
+    <button type="submit" value="Registro" name="Option" style="width:300px;height:30px">Añadir Paciente</button>
 </div>
+<br />
+<div style="text-align: center">
+    <button type="submit" value="Busqueda" name="Option" style="width:300px;height:30px">Lista de pacientes</button>
+</div>
+<br />
+<div style="text-align: center">
+    <button type="submit" value="Listaespera" name="Option" style="width:300px;height:30px">Lista de hospitales</button>
+</div>
+<br />
+<div style="text-align: center">
+    <button type="submit" value="Hospitales" name="Option" style="width:300px;height:30px">Estadísticas</button>
+</div>
+<div style="text-align: center">
+    <button type="submit" value="Vacunados" name="Option" style="width:300px;height:30px">Estadísticas</button>
+</div>
+}
