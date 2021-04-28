@@ -12,6 +12,7 @@ namespace CustomGenerics
         //Interface referenciada de: https://stackoverflow.com/questions/6569486/creating-a-copy-of-an-object-in-c-sharp
         public Node<T> Root;
         public int tasksQuantity;
+        public int PatientsNumber;
 
         public PriorityQueue()
         {
@@ -28,17 +29,17 @@ namespace CustomGenerics
             return tasksQuantity == 10 ? true : false;
         }
 
-        public void AddTask(string key, DateTime date, int priority)
+        public void AddPatient(string key,  int priority, int age)
         {
-            var newNode = new Node<T>(key, date, priority);
+            var newNode = new Node<T>(key, priority, age);
             if (IsEmpty())
             {
                 Root = newNode;
-                tasksQuantity = 1;
+                PatientsNumber = 1;
             }
             else
             {
-                tasksQuantity++;
+                PatientsNumber++;
                 var NewNodeFather = SearchLastNode(Root, 1);
                 if (NewNodeFather.LeftSon != null)
                 {
@@ -52,6 +53,7 @@ namespace CustomGenerics
                     newNode.Father = NewNodeFather;
                     OrderDowntoUp(newNode);
                 }
+
             }
         }
 
@@ -111,7 +113,7 @@ namespace CustomGenerics
                 else if (current.Priority == current.Father.Priority)
                 {
                     //Segundo criterio prioridad
-                    if (current.DatePriority < current.Father.DatePriority)
+                    if (current.Age < current.Father.Age)
                     {
                         ChangeNodes(current);
                     }
@@ -123,13 +125,13 @@ namespace CustomGenerics
         {
             var Priority1 = node.Priority;
             var Key1 = node.Key;
-            var Date1 = node.DatePriority;
+            var Date1 = node.Age;
             node.Priority = node.Father.Priority;
             node.Key = node.Father.Key;
-            node.DatePriority = node.Father.DatePriority;
+            node.Age = node.Father.Age;
             node.Father.Priority = Priority1;
             node.Father.Key = Key1;
-            node.Father.DatePriority = Date1;
+            node.Father.Age = Date1;
         }
         public Node<T> Delete()
         {
@@ -172,7 +174,7 @@ namespace CustomGenerics
                     }
                     else if (current.Priority == current.RightSon.Priority)
                     {
-                        if (current.DatePriority > current.RightSon.DatePriority)
+                        if (current.Age > current.RightSon.Age)
                         {
                             ChangeNodes(current.RightSon);
                             OrderDowntoUp(current.RightSon);
@@ -188,7 +190,7 @@ namespace CustomGenerics
                     }
                     else if (current.Priority == current.LeftSon.Priority)
                     {
-                        if (current.DatePriority > current.LeftSon.DatePriority)
+                        if (current.Age > current.LeftSon.Age)
                         {
                             ChangeNodes(current.LeftSon);
                             OrderDowntoUp(current.LeftSon);
@@ -197,7 +199,7 @@ namespace CustomGenerics
                 }
                 else
                 {
-                    if (current.LeftSon.DatePriority > current.RightSon.DatePriority)
+                    if (current.LeftSon.Age > current.RightSon.Age)
                     {
                         if (current.Priority > current.RightSon.Priority)
                         {
@@ -206,7 +208,7 @@ namespace CustomGenerics
                         }
                         else if (current.Priority == current.RightSon.Priority)
                         {
-                            if (current.DatePriority > current.RightSon.DatePriority)
+                            if (current.Age > current.RightSon.Age)
                             {
                                 ChangeNodes(current.RightSon);
                                 OrderDowntoUp(current.RightSon);
@@ -222,7 +224,7 @@ namespace CustomGenerics
                         }
                         else if (current.Priority == current.LeftSon.Priority)
                         {
-                            if (current.DatePriority > current.LeftSon.DatePriority)
+                            if (current.Age > current.LeftSon.Age)
                             {
                                 ChangeNodes(current.LeftSon);
                                 OrderDowntoUp(current.LeftSon);
@@ -240,7 +242,7 @@ namespace CustomGenerics
                 }
                 else if (current.Priority == current.RightSon.Priority)
                 {
-                    if (current.DatePriority > current.RightSon.DatePriority)
+                    if (current.Age > current.RightSon.Age)
                     {
                         ChangeNodes(current.RightSon);
                         OrderDowntoUp(current.RightSon);
@@ -256,7 +258,7 @@ namespace CustomGenerics
                 }
                 else if (current.Priority == current.LeftSon.Priority)
                 {
-                    if (current.DatePriority > current.LeftSon.DatePriority)
+                    if (current.Age > current.LeftSon.Age)
                     {
                         ChangeNodes(current.LeftSon);
                         OrderDowntoUp(current.LeftSon);

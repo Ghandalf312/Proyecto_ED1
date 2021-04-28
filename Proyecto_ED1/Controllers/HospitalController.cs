@@ -12,11 +12,24 @@ namespace Proyecto_ED1.Controllers
 {
     public class HospitalController : Controller
     {
+        public static bool FirstTime = true;
         #region Metodos GET
         public ActionResult Index()
         {
+            if (FirstTime)
+            {
+                LoadHospitalsByDepartment();
+                FirstTime = false;
+            }
             return View();
         }
+
+
+
+
+
+
+
         public ActionResult Registro()
         {
             return View();
@@ -32,6 +45,14 @@ namespace Proyecto_ED1.Controllers
             switch (option)
             {
                 case "Registro":
+                    return RedirectToAction("Registro");
+                case "Busqueda":
+                    return RedirectToAction("Registro");
+                case "Lista espera":
+                    return RedirectToAction("Registro");
+                case "Hospitales":
+                    return RedirectToAction("Registro");
+                case "% vacunados":
                     return RedirectToAction("Registro");
             }
             return View();
@@ -59,7 +80,7 @@ namespace Proyecto_ED1.Controllers
                         return View("Registro");
                     }
                 }
-                var newPatient = new PatientExtModel()
+                var newPatient = new PatientModel()
                 {
                     Name = collection["Name"],
                     LastName = collection["LastName"],
@@ -67,17 +88,28 @@ namespace Proyecto_ED1.Controllers
                     Age = int.Parse(collection["Age"]),
                     Department = collection["Department"],
                     Municipality = collection["Municipality"],
-                    Hospital = collection["Hospital"] //pendiente metodo para tener el hospital
+                   
                 };
-                newPatient.PriorityAssignment();
-                var newPatientModel = new PatientModel
+                
+                var newPatientModel = new PatientExtModel
                 {
                     Name = newPatient.Name,
                     LastName = newPatient.LastName,
+                    NameKey = newPatient.Name,
+                    LastNameKey = newPatient.LastName,
                     DPI = newPatient.DPI,
-                    Priority = newPatient.Priority,
-                    Hospital = newPatient.Hospital
+                  
+                
                 };
+                newPatientModel.PriorityAssignment();
+                newPatientModel.HospitalAssigment();
+                
+
+
+
+
+
+
                 //Agregar al arbol
 
                 if (Singleton.Instance.patientsByName.Buscar(newPatientModel.Name) != null)
@@ -132,7 +164,7 @@ namespace Proyecto_ED1.Controllers
                 }
 
                 Singleton.Instance.patientsByDPI.Add(newPatientModel, newPatientModel.DPI);
-                Singleton.Instance.patientsHash.Insert(newPatient, newPatient.DPI);
+                Singleton.Instance.patientsHash.Insert(newPatientModel, newPatientModel.DPI);
                 return RedirectToAction("Index");
             }
             catch
@@ -160,5 +192,29 @@ namespace Proyecto_ED1.Controllers
             }
         }
         #endregion
+
+        private void LoadHospitalsByDepartment()
+        {
+            AddHospital("Guatemala");
+            AddHospital("Izabal");
+            AddHospital("Zacapa");
+
+        }
+
+
+        private void AddHospital(string hospital)
+        {
+            var newHospital = new Hospital()
+            {
+                HospitalName = hospital,
+                PatientQueue = new CustomGenerics.PriorityQueue<PatientExtModel>(),
+            
+            };
+            newHospital.GetDepartments();
+            Singleton.Instance.Hospitals.Add(newHospital);
+        }
+
     }
+
+
 }

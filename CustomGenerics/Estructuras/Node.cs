@@ -14,14 +14,15 @@ namespace CustomGenerics.Estructuras
 
         public string Key;
         public int Priority;
-        public DateTime DatePriority;
+        public int Age;
 
         //Constructor
-        public Node(string key, DateTime Date, int priority)
+        public Node(string key, int priority, int age)
         {
             Key = key;
-            DatePriority = Date;
             Priority = priority;
+            Age = age;
+            
         }
     }
 }

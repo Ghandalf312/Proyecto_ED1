@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CustomGenerics.Estructuras;
+using CustomGenerics;
 using Proyecto_ED1.Models;
+
 
 namespace Proyecto_ED1.Models.Storage
 {
@@ -25,5 +27,6 @@ namespace Proyecto_ED1.Models.Storage
         public AVLTree<PatientModel, string> patientsByLastName = new AVLTree<PatientModel, string>();
         public List<RepeatedModel> repeatedLastNames = new List<RepeatedModel>();
         public AVLTree<PatientModel, string> patientsByDPI = new AVLTree<PatientModel, string>();
+        public List<Hospital> Hospitals = new List<Hospital>();
     }
 }
