@@ -40,6 +40,35 @@ namespace Proyecto_ED1.Controllers
             Singleton.Instance.Location.Sort();
             return View(Singleton.Instance.Location);
         }
+
+        public ActionResult Hospital2()
+        {
+            Singleton.Instance.Location.Clear();
+            foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
+            {
+                if (patient.Value.Hospital == "Guatemala")
+                {
+                    Singleton.Instance.Location.Add(patient.Value);
+                }
+            }
+            Singleton.Instance.Location.Sort();
+            return View(Singleton.Instance.Location);
+        }
+
+        public ActionResult Hospital3()
+        {
+            Singleton.Instance.Location.Clear();
+            foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
+            {
+                if (patient.Value.Hospital == "Totonicapán")
+                {
+                    Singleton.Instance.Location.Add(patient.Value);
+                }
+            }
+            Singleton.Instance.Location.Sort();
+            return View(Singleton.Instance.Location);
+        }
+
         public ActionResult Simulacion()
         {
             return View();
@@ -188,15 +217,29 @@ namespace Proyecto_ED1.Controllers
                 case "Hospital1":
                     return RedirectToAction("Hospital1");
                 case "Hospital2":
-                    return RedirectToAction("Busqueda");
+                    return RedirectToAction("Hospital2");
                 case "Hospital3":
-                    return RedirectToAction("Busqueda");
+                    return RedirectToAction("Hospital3");
             }
             return View();
         }
 
         [HttpPost]
         public ActionResult Hospital1(IFormCollection collection)
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Hospital2(IFormCollection collection)
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Hospital3(IFormCollection collection)
         {
             return View();
         }
