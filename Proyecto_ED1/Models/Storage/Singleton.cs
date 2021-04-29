@@ -28,6 +28,11 @@ namespace Proyecto_ED1.Models.Storage
         public List<RepeatedModel> repeatedLastNames = new List<RepeatedModel>();
         public AVLTree<PatientModel, string> patientsByDPI = new AVLTree<PatientModel, string>();
         public List<Hospital> Hospitals = new List<Hospital>();
-        public List<PatientModel> Location  = new List<PatientModel>();
+
+        public List<PatientExtModel> Location  = new List<PatientExtModel>();
+
+        public PriorityQueue<PatientExtModel> patientsH1 = new PriorityQueue<PatientExtModel>();
+        public PriorityQueue<PatientExtModel> patientsH2 = new PriorityQueue<PatientExtModel>();
+        public PriorityQueue<PatientExtModel> patientsH3 = new PriorityQueue<PatientExtModel>();
     }
 }

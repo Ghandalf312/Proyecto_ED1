@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CustomGenerics.Estructuras;
+using CustomGenerics;
 using Proyecto_ED1.Models;
 using Proyecto_ED1.Models.Storage;
 
@@ -24,6 +25,10 @@ namespace Proyecto_ED1.Controllers
             return View();
         }
         public ActionResult Registro()
+        {
+            return View();
+        }
+        public ActionResult Espera()
         {
             return View();
         }
@@ -73,6 +78,55 @@ namespace Proyecto_ED1.Controllers
         {
             return View();
         }
+        public ActionResult Hospital1s()
+        {//pendiente para ver
+            Singleton.Instance.Location.Clear();
+            int currentPatientCount = 0;
+            int patientCount = 3;
+            foreach (var patient in Singleton.Instance.patientsH1)
+            {
+                if (patient.Hospital == "Alta Verapaz" && currentPatientCount < patientCount)
+                {
+                    Singleton.Instance.Location.Add(patient);
+                    currentPatientCount++;
+                }
+
+            }
+            Singleton.Instance.Location.Sort();
+            return View(Singleton.Instance.Location);
+        }
+        public ActionResult Hospital2s()
+        {
+            Singleton.Instance.Location.Clear();
+            int currentPatientCount = 0;
+            int patientCount = 3;
+            foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
+            {
+                if (patient.Value.Hospital == "Guatemala" && currentPatientCount < patientCount)
+                {
+                    Singleton.Instance.Location.Add(patient.Value);
+                    currentPatientCount++;
+                }
+            }
+            Singleton.Instance.Location.Sort();
+            return View(Singleton.Instance.Location);
+        }
+        public ActionResult Hospital3s()
+        {
+            Singleton.Instance.Location.Clear();
+            int currentPatientCount = 0;
+            int patientCount = 3;
+            foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
+            {
+                if (patient.Value.Hospital == "Totonicapán" && currentPatientCount < patientCount)
+                {
+                    Singleton.Instance.Location.Add(patient.Value);
+                    currentPatientCount++;
+                }
+            }
+            Singleton.Instance.Location.Sort();
+            return View(Singleton.Instance.Location);
+        }
         #endregion
         #region Metodos HTTPOST
         [HttpPost]
@@ -83,6 +137,8 @@ namespace Proyecto_ED1.Controllers
             {
                 case "Registro":
                     return RedirectToAction("Registro");
+                case "Espera":
+                    return RedirectToAction("Espera");
                 case "Simulacion":
                     return RedirectToAction("Simulacion");
             }
@@ -197,6 +253,19 @@ namespace Proyecto_ED1.Controllers
                     Singleton.Instance.patientsByLastName.Add(newPatientModel, newPatientModel.LastNameKey);
                 }
 
+                //Agregar a la cola de prioridad
+                if (newPatientModel.Hospital == "Alta Verapaz")
+                {
+                    Singleton.Instance.patientsH1.AddPatient(newPatientModel.DPI, newPatientModel.Age, newPatientModel, newPatientModel.Priority);
+                }
+                else if (newPatientModel.Hospital == "Guatemala")
+                {
+                    Singleton.Instance.patientsH1.AddPatient(newPatientModel.DPI, newPatientModel.Age, newPatientModel, newPatientModel.Priority);
+                }
+                else if (newPatientModel.Hospital == "Totonicapán")
+                {
+                    Singleton.Instance.patientsH1.AddPatient(newPatientModel.DPI, newPatientModel.Age, newPatientModel, newPatientModel.Priority);
+                }
                 Singleton.Instance.patientsByDPI.Add(newPatientModel, newPatientModel.DPI);
                 Singleton.Instance.patientsHash.Insert(newPatientModel, newPatientModel.DPI);
                 return RedirectToAction("Index");
@@ -207,9 +276,8 @@ namespace Proyecto_ED1.Controllers
             }
             return View();
         }
-
         [HttpPost]
-        public ActionResult Simulacion(IFormCollection collection)
+        public ActionResult Espera(IFormCollection collection)
         {
             var option = collection["Option"];
             switch (option)
@@ -223,26 +291,53 @@ namespace Proyecto_ED1.Controllers
             }
             return View();
         }
-
         [HttpPost]
         public ActionResult Hospital1(IFormCollection collection)
         {
             return View();
         }
-
-
         [HttpPost]
         public ActionResult Hospital2(IFormCollection collection)
         {
             return View();
         }
-
-
         [HttpPost]
         public ActionResult Hospital3(IFormCollection collection)
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Simulacion(IFormCollection collection)
+        {
+            var option = collection["Option"];
+            switch (option)
+            {
+                case "Hospital1s":
+                    return RedirectToAction("Hospital1s");
+                case "Hospital2s":
+                    return RedirectToAction("Hospital2s");
+                case "Hospital3s":
+                    return RedirectToAction("Hospital3s");
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Hospital1s(IFormCollection collection)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Hospital2s(IFormCollection collection)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Hospital3s(IFormCollection collection)
+        {
+            return View();
+        }
+
         #endregion
         #region Metodos_ayuda
         /// <summary>
@@ -275,7 +370,7 @@ namespace Proyecto_ED1.Controllers
             var newHospital = new Hospital()
             {
                 HospitalName = hospital,
-                PatientQueue = new CustomGenerics.PriorityQueue<PatientExtModel>(),
+                PatientQueue = new PriorityQueue<PatientModel>(),
             
             };
             newHospital.GetDepartments();
@@ -294,9 +389,6 @@ namespace Proyecto_ED1.Controllers
             return null;
         }
         #endregion
-
-
-
     }
 
 

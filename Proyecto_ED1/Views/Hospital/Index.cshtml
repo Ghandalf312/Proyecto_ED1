@@ -14,13 +14,17 @@
 @using (Html.BeginForm("Index", "Hospital", FormMethod.Post))
 {
 
-<br />
-<div style="text-align: center">
-    <button type="submit" value="Registro" name="Option" style="width:300px;height:30px">Añadir Paciente</button>
-</div>
-<br />
-<div style="text-align: center">
-    <button type="submit" value="Simulacion" name="Option" style="width:300px;height:30px">Simulación de Vacunación</button>
-</div>
-<br />
+    <br />
+    <div style="text-align: center">
+        <button type="submit" value="Registro" name="Option" style="width:300px;height:30px">Añadir Paciente</button>
+    </div>
+    <br />
+    <div style="text-align: center">
+        <button type="submit" value="Espera" name="Option" style="width:300px;height:30px">Lista de espera por hospital</button>
+    </div>
+    <br />
+    <div style="text-align: center">
+        <button type="submit" value="Simulacion" name="Option" style="width:300px;height:30px">Iniciar simulación</button>
+    </div>
+    <br />
 }
