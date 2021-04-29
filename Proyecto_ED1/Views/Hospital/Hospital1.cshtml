@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Proyecto_ED1.Models.PatientExtModel>
+﻿@model IEnumerable<Proyecto_ED1.Models.PatientModel>
 
 @{
     ViewData["Title"] = "Hospital1";
@@ -12,15 +12,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NameKey)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastNameKey)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hospital)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -48,15 +39,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameKey)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastNameKey)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hospital)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>

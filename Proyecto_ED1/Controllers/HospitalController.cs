@@ -35,10 +35,9 @@ namespace Proyecto_ED1.Controllers
                 if (patient.Value.Hospital == "Alta Verapaz")
                 {
                     Singleton.Instance.Location.Add(patient.Value);
-                    
                 }
             }
-            
+            Singleton.Instance.Location.Sort();
             return View(Singleton.Instance.Location);
         }
         public ActionResult Simulacion()
@@ -46,10 +45,6 @@ namespace Proyecto_ED1.Controllers
             return View();
         }
         #endregion
-
-
-
-
         #region Metodos HTTPOST
         [HttpPost]
         public ActionResult Index(IFormCollection collection)
@@ -205,8 +200,8 @@ namespace Proyecto_ED1.Controllers
         {
             return View();
         }
-
-
+        #endregion
+        #region Metodos_ayuda
         /// <summary>
         /// Si el string tiene un numero, retorna verdadero, si no, retorna falso.
         /// </summary>
@@ -224,7 +219,6 @@ namespace Proyecto_ED1.Controllers
                 return false;
             }
         }
-        #endregion
         private void LoadHospitalsByDepartment()
         {
             AddHospital("Alta Verapaz");
@@ -256,7 +250,7 @@ namespace Proyecto_ED1.Controllers
             }
             return null;
         }
-
+        #endregion
 
 
 

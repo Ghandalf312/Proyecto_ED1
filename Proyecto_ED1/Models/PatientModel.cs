@@ -23,8 +23,9 @@ namespace Proyecto_ED1.Models
         public string Department { get; set; }
         [Display(Name = "Municipio")]
         public string Municipality { get; set; }
+        [Display(Name = "Edad")]
         public int Age { get; set; }
-
+        [Display(Name = "Prioridad")]
         public int Priority { get; set; }
 
         public int CompareTo(PatientModel obj)
