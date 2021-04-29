@@ -11,7 +11,6 @@ namespace Proyecto_ED1.Models
         public string NameKey { get; set; }
         public string LastNameKey { get; set; }
 
-        public int Priority { get; set; }
         public string Hospital { get; set; }
 
         /// <summary>

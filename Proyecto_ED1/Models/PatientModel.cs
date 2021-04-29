@@ -24,17 +24,12 @@ namespace Proyecto_ED1.Models
         [Display(Name = "Municipio")]
         public string Municipality { get; set; }
         public int Age { get; set; }
- 
+
+        public int Priority { get; set; }
+
         public int CompareTo(PatientModel obj)
         {
-            if (obj == null)
-            {
-                return 0;
-            }
-            else
-            {
-                return this.DPI.CompareTo(obj);
-            }
+            return Priority.CompareTo(obj.Priority);
         }
 
 

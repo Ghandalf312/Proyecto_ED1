@@ -23,18 +23,18 @@ namespace Proyecto_ED1.Controllers
             }
             return View();
         }
-
-
-
-
-
-
-
         public ActionResult Registro()
         {
             return View();
         }
-
+        public ActionResult Hospital1()
+        {
+            return View();
+        }
+        public ActionResult Simulacion()
+        {
+            return View();
+        }
         #endregion
 
         #region Metodos HTTPOST
@@ -46,14 +46,8 @@ namespace Proyecto_ED1.Controllers
             {
                 case "Registro":
                     return RedirectToAction("Registro");
-                case "Busqueda":
+                case "Simulacion":
                     return RedirectToAction("Busqueda");
-                case "Lista espera":
-                    return RedirectToAction("Listaespera");
-                case "Hospitales":
-                    return RedirectToAction("Hospitales");
-                case "% vacunados":
-                    return RedirectToAction("Vacunados");
             }
             return View();
         }
@@ -113,11 +107,6 @@ namespace Proyecto_ED1.Controllers
                 newPatientModel.PriorityAssignment();
              
 
-
-
-            
-
-
                 //Agregar al arbol
 
                 if (Singleton.Instance.patientsByName.Buscar(newPatientModel.Name) != null)
@@ -142,7 +131,7 @@ namespace Proyecto_ED1.Controllers
                 else
                 {
                     newPatientModel.NameKey = newPatientModel.Name;
-                    Singleton.Instance.patientsByName.Add(newPatientModel, newPatientModel.Name);
+                    Singleton.Instance.patientsByName.Add(newPatientModel, newPatientModel.NameKey);
                 }
 
 
@@ -168,7 +157,7 @@ namespace Proyecto_ED1.Controllers
                 else
                 {
                     newPatientModel.LastNameKey = newPatientModel.LastName;
-                    Singleton.Instance.patientsByLastName.Add(newPatientModel, newPatientModel.LastName);
+                    Singleton.Instance.patientsByLastName.Add(newPatientModel, newPatientModel.LastNameKey);
                 }
 
                 Singleton.Instance.patientsByDPI.Add(newPatientModel, newPatientModel.DPI);
@@ -178,6 +167,22 @@ namespace Proyecto_ED1.Controllers
             catch
             {
                 ModelState.AddModelError("Municipality", "Por favor, asegurese de haber llenado todo los campos correctamente.");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Simulacion(IFormCollection collection)
+        {
+            var option = collection["Option"];
+            switch (option)
+            {
+                case "Hospital1":
+                    return RedirectToAction("Hospital1");
+                case "Hospital2":
+                    return RedirectToAction("Busqueda");
+                case "Hospital3":
+                    return RedirectToAction("Busqueda");
             }
             return View();
         }
@@ -200,7 +205,6 @@ namespace Proyecto_ED1.Controllers
             }
         }
         #endregion
-
         private void LoadHospitalsByDepartment()
         {
             AddHospital("Alta Verapaz");
@@ -208,7 +212,6 @@ namespace Proyecto_ED1.Controllers
             AddHospital("Totonicapán");
 
         }
-
 
         private void AddHospital(string hospital)
         {
