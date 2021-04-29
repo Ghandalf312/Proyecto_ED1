@@ -29,13 +29,26 @@ namespace Proyecto_ED1.Controllers
         }
         public ActionResult Hospital1()
         {
-            return View();
+            Singleton.Instance.Location.Clear();
+            foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
+            {
+                if (patient.Value.Hospital == "Alta Verapaz")
+                {
+                    Singleton.Instance.Location.Add(patient.Value);
+                    
+                }
+            }
+            
+            return View(Singleton.Instance.Location);
         }
         public ActionResult Simulacion()
         {
             return View();
         }
         #endregion
+
+
+
 
         #region Metodos HTTPOST
         [HttpPost]
@@ -47,7 +60,7 @@ namespace Proyecto_ED1.Controllers
                 case "Registro":
                     return RedirectToAction("Registro");
                 case "Simulacion":
-                    return RedirectToAction("Busqueda");
+                    return RedirectToAction("Simulacion");
             }
             return View();
         }
@@ -186,6 +199,13 @@ namespace Proyecto_ED1.Controllers
             }
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Hospital1(IFormCollection collection)
+        {
+            return View();
+        }
+
 
         /// <summary>
         /// Si el string tiene un numero, retorna verdadero, si no, retorna falso.

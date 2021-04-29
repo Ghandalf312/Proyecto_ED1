@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "Simulacion";
+}
+
+<h1>Simulacion</h1>
+
+
+@using (Html.BeginForm("Simulacion", "Hospital", FormMethod.Post))
+{
+
+    <br />
+    <div style="text-align: center">
+        <button type="submit" value="Hospital1" name="Option" style="width:300px;height:30px">Alta Verapaz</button>
+    </div>
+    <br />
+    <div style="text-align: center">
+        <button type="submit" value="Hospital2" name="Option" style="width:300px;height:30px">Guatemala</button>
+    </div>
+    <br />
+    <div style="text-align: center">
+        <button type="submit" value="Hospital3" name="Option" style="width:300px;height:30px">Totonicapán</button>
+    </div>
+
+}

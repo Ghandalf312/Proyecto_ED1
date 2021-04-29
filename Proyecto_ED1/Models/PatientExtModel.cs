@@ -20,15 +20,15 @@ namespace Proyecto_ED1.Models
         {
             if (Age >= 60)
             {
-                Priority = 1;
+                Priority = 3;
             }
             else if (17 < Age && Age < 60)
             {
                 Priority = 2;
             }
-            else if (1 < Age && Age <= 17)
+            else if (1 <= Age && Age <= 17)
             {
-                Priority = 3;
+                Priority = 1;
             }
         }
 
