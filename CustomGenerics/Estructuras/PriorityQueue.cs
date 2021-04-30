@@ -90,7 +90,7 @@ namespace CustomGenerics.Estructuras
                 }
                 else if (current.Priority == current.Father.Priority)
                 {
-                    if (current.AgePriority < current.Father.AgePriority)
+                    if (current.AgePriority > current.Father.AgePriority)
                     {
                         ChangeNodes(current);
                     }
@@ -115,7 +115,7 @@ namespace CustomGenerics.Estructuras
                     }
                     else if (current.Priority == current.RightSon.Priority)
                     {
-                        if (current.AgePriority > current.RightSon.AgePriority)
+                        if (current.AgePriority < current.RightSon.AgePriority)
                         {
                             ChangeNodes(current.RightSon);
                             OrderUptoDown(current.RightSon);
@@ -131,7 +131,7 @@ namespace CustomGenerics.Estructuras
                     }
                     else if (current.Priority == current.LeftSon.Priority)
                     {
-                        if (current.AgePriority > current.LeftSon.AgePriority)
+                        if (current.AgePriority < current.LeftSon.AgePriority)
                         {
                             ChangeNodes(current.LeftSon);
                             OrderUptoDown(current.LeftSon);
@@ -140,7 +140,7 @@ namespace CustomGenerics.Estructuras
                 }
                 else
                 {
-                    if (current.LeftSon.AgePriority > current.RightSon.AgePriority)
+                    if (current.LeftSon.AgePriority < current.RightSon.AgePriority)
                     {
                         if (current.Priority > current.RightSon.Priority)
                         {
@@ -149,7 +149,7 @@ namespace CustomGenerics.Estructuras
                         }
                         else if (current.Priority == current.RightSon.Priority)
                         {
-                            if (current.AgePriority > current.RightSon.AgePriority)
+                            if (current.AgePriority < current.RightSon.AgePriority)
                             {
                                 ChangeNodes(current.RightSon);
                                 OrderUptoDown(current.RightSon);
@@ -165,7 +165,7 @@ namespace CustomGenerics.Estructuras
                         }
                         else if (current.Priority == current.LeftSon.Priority)
                         {
-                            if (current.AgePriority > current.LeftSon.AgePriority)
+                            if (current.AgePriority < current.LeftSon.AgePriority)
                             {
                                 ChangeNodes(current.LeftSon);
                                 OrderUptoDown(current.LeftSon);
@@ -183,7 +183,7 @@ namespace CustomGenerics.Estructuras
                 }
                 else if (current.Priority == current.RightSon.Priority)
                 {
-                    if (current.AgePriority > current.RightSon.AgePriority)
+                    if (current.AgePriority < current.RightSon.AgePriority)
                     {
                         ChangeNodes(current.RightSon);
                         OrderUptoDown(current.RightSon);
@@ -199,7 +199,7 @@ namespace CustomGenerics.Estructuras
                 }
                 else if (current.Priority == current.LeftSon.Priority)
                 {
-                    if (current.AgePriority > current.LeftSon.AgePriority)
+                    if (current.AgePriority < current.LeftSon.AgePriority)
                     {
                         ChangeNodes(current.LeftSon);
                         OrderUptoDown(current.LeftSon);
@@ -263,7 +263,7 @@ namespace CustomGenerics.Estructuras
             }
             OrderUptoDown(Root);
             PatientsNumber--;
-            return FirstNode;
+            return Root;
         }
         /// <summary>
         /// Busca el ultimo insertado en la cola de prioridad.
@@ -316,7 +316,6 @@ namespace CustomGenerics.Estructuras
             }
 
         }
-
         /// <summary>
         /// Implementacion del Icloneable, clona la cola de prioridad
         /// </summary>

@@ -79,18 +79,34 @@ namespace Proyecto_ED1.Controllers
             return View();
         }
         public ActionResult Hospital1s()
-        {//pendiente para ver
+        {
             Singleton.Instance.Location.Clear();
             int currentPatientCount = 0;
             int patientCount = 3;
-            foreach (var patient in Singleton.Instance.patientsH1)
+
+            foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
             {
-                if (patient.Hospital == "Alta Verapaz" && currentPatientCount < patientCount)
+                if (patient.Value.Hospital == "Alta Verapaz" && currentPatientCount < patientCount && patient.Value.Priority == 1)
                 {
-                    Singleton.Instance.Location.Add(patient);
+                    Singleton.Instance.Location.Add(patient.Value);
                     currentPatientCount++;
                 }
-
+            }
+            foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
+            {
+                if (patient.Value.Hospital == "Alta Verapaz" && currentPatientCount < patientCount && patient.Value.Priority == 2)
+                {
+                    Singleton.Instance.Location.Add(patient.Value);
+                    currentPatientCount++;
+                }
+            }
+            foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
+            {
+                if (patient.Value.Hospital == "Alta Verapaz" && currentPatientCount < patientCount && patient.Value.Priority == 3)
+                {
+                    Singleton.Instance.Location.Add(patient.Value);
+                    currentPatientCount++;
+                }
             }
             Singleton.Instance.Location.Sort();
             return View(Singleton.Instance.Location);
@@ -102,7 +118,23 @@ namespace Proyecto_ED1.Controllers
             int patientCount = 3;
             foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
             {
-                if (patient.Value.Hospital == "Guatemala" && currentPatientCount < patientCount)
+                if (patient.Value.Hospital == "Guatemala" && currentPatientCount < patientCount && patient.Value.Priority == 1)
+                {
+                    Singleton.Instance.Location.Add(patient.Value);
+                    currentPatientCount++;
+                }
+            }
+            foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
+            {
+                if (patient.Value.Hospital == "Guatemala" && currentPatientCount < patientCount && patient.Value.Priority == 2)
+                {
+                    Singleton.Instance.Location.Add(patient.Value);
+                    currentPatientCount++;
+                }
+            }
+            foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
+            {
+                if (patient.Value.Hospital == "Guatemala" && currentPatientCount < patientCount && patient.Value.Priority == 3)
                 {
                     Singleton.Instance.Location.Add(patient.Value);
                     currentPatientCount++;
@@ -118,7 +150,23 @@ namespace Proyecto_ED1.Controllers
             int patientCount = 3;
             foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
             {
-                if (patient.Value.Hospital == "Totonicapán" && currentPatientCount < patientCount)
+                if (patient.Value.Hospital == "Totonicapán" && currentPatientCount < patientCount && patient.Value.Priority == 1)
+                {
+                    Singleton.Instance.Location.Add(patient.Value);
+                    currentPatientCount++;
+                }
+            }
+            foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
+            {
+                if (patient.Value.Hospital == "Totonicapán" && currentPatientCount < patientCount && patient.Value.Priority == 2)
+                {
+                    Singleton.Instance.Location.Add(patient.Value);
+                    currentPatientCount++;
+                }
+            }
+            foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
+            {
+                if (patient.Value.Hospital == "Totonicapán" && currentPatientCount < patientCount && patient.Value.Priority == 3)
                 {
                     Singleton.Instance.Location.Add(patient.Value);
                     currentPatientCount++;
@@ -260,11 +308,11 @@ namespace Proyecto_ED1.Controllers
                 }
                 else if (newPatientModel.Hospital == "Guatemala")
                 {
-                    Singleton.Instance.patientsH1.AddPatient(newPatientModel.DPI, newPatientModel.Age, newPatientModel, newPatientModel.Priority);
+                    Singleton.Instance.patientsH2.AddPatient(newPatientModel.DPI, newPatientModel.Age, newPatientModel, newPatientModel.Priority);
                 }
                 else if (newPatientModel.Hospital == "Totonicapán")
                 {
-                    Singleton.Instance.patientsH1.AddPatient(newPatientModel.DPI, newPatientModel.Age, newPatientModel, newPatientModel.Priority);
+                    Singleton.Instance.patientsH3.AddPatient(newPatientModel.DPI, newPatientModel.Age, newPatientModel, newPatientModel.Priority);
                 }
                 Singleton.Instance.patientsByDPI.Add(newPatientModel, newPatientModel.DPI);
                 Singleton.Instance.patientsHash.Insert(newPatientModel, newPatientModel.DPI);
@@ -339,6 +387,7 @@ namespace Proyecto_ED1.Controllers
         }
 
         #endregion
+
         #region Metodos_ayuda
         /// <summary>
         /// Si el string tiene un numero, retorna verdadero, si no, retorna falso.

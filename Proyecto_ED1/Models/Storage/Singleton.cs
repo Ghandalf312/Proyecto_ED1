@@ -32,6 +32,7 @@ namespace Proyecto_ED1.Models.Storage
         public List<PatientExtModel> Location  = new List<PatientExtModel>();
 
         public PriorityQueue<PatientExtModel> patientsH1 = new PriorityQueue<PatientExtModel>();
+        public PriorityQueue<PatientExtModel> patientsH1Copy = new PriorityQueue<PatientExtModel>();
         public PriorityQueue<PatientExtModel> patientsH2 = new PriorityQueue<PatientExtModel>();
         public PriorityQueue<PatientExtModel> patientsH3 = new PriorityQueue<PatientExtModel>();
     }
