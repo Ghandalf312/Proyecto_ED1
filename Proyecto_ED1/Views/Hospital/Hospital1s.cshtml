@@ -61,11 +61,20 @@
                 @Html.DisplayFor(modelItem => item.Priority)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                       Vacunado
+                    </label>
+                </div>
+
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<br> 
+
+<button type="button" class="btn btn-outline-danger">Regresar al menu</button>
+<button type="button" class="btn btn-outline-danger">Siguiente</button>

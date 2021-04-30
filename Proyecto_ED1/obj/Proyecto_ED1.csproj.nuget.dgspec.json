@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ZeroJChang\\Desktop\\Proyecto!\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj": {}
+    "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ZeroJChang\\Desktop\\Proyecto!\\Proyecto_ED1\\CustomGenerics\\CustomGenerics.csproj": {
+    "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\CustomGenerics\\CustomGenerics.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto!\\Proyecto_ED1\\CustomGenerics\\CustomGenerics.csproj",
+        "projectUniqueName": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\CustomGenerics\\CustomGenerics.csproj",
         "projectName": "CustomGenerics",
-        "projectPath": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto!\\Proyecto_ED1\\CustomGenerics\\CustomGenerics.csproj",
+        "projectPath": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\CustomGenerics\\CustomGenerics.csproj",
         "packagesPath": "C:\\Users\\ZeroJChang\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto!\\Proyecto_ED1\\CustomGenerics\\obj\\",
+        "outputPath": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\CustomGenerics\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -61,14 +61,14 @@
         }
       }
     },
-    "C:\\Users\\ZeroJChang\\Desktop\\Proyecto!\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj": {
+    "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto!\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj",
+        "projectUniqueName": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj",
         "projectName": "Proyecto_ED1",
-        "projectPath": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto!\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj",
+        "projectPath": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\Proyecto_ED1\\Proyecto_ED1.csproj",
         "packagesPath": "C:\\Users\\ZeroJChang\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto!\\Proyecto_ED1\\Proyecto_ED1\\obj\\",
+        "outputPath": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\Proyecto_ED1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -89,8 +89,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\ZeroJChang\\Desktop\\Proyecto!\\Proyecto_ED1\\CustomGenerics\\CustomGenerics.csproj": {
-                "projectPath": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto!\\Proyecto_ED1\\CustomGenerics\\CustomGenerics.csproj"
+              "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\CustomGenerics\\CustomGenerics.csproj": {
+                "projectPath": "C:\\Users\\ZeroJChang\\Desktop\\Proyecto ED\\Proyecto_ED1\\CustomGenerics\\CustomGenerics.csproj"
               }
             }
           }
