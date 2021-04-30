@@ -13,6 +13,7 @@ namespace Proyecto_ED1.Controllers
 {
     public class HospitalController : Controller
     {
+        public int contador =0;
         public static bool FirstTime = true;
         #region Metodos GET
         public ActionResult Index()
@@ -30,6 +31,11 @@ namespace Proyecto_ED1.Controllers
         }
         public ActionResult Espera()
         {
+            return View();
+        }
+        public ActionResult Busqueda()
+        {
+            Singleton.Instance.miBuqueda.Clear();
             return View();
         }
         public ActionResult Hospital1()
@@ -316,6 +322,7 @@ namespace Proyecto_ED1.Controllers
                 }
                 Singleton.Instance.patientsByDPI.Add(newPatientModel, newPatientModel.DPI);
                 Singleton.Instance.patientsHash.Insert(newPatientModel, newPatientModel.DPI);
+                contador++;
                 return RedirectToAction("Index");
             }
             catch
@@ -385,6 +392,98 @@ namespace Proyecto_ED1.Controllers
         {
             return View();
         }
+
+
+        [HttpPost]
+        public ActionResult Busqueda(IFormCollection collection)
+        {
+            var x = collection["select"];
+            var busqueda = collection["search"];
+            Singleton.Instance.miBuqueda.Clear();
+            switch (x)
+            {
+                case "DPI":
+                    try
+                    {
+                        for (int j = 0; j <= contador; j++)
+                        {
+                            Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByDPI.Buscar(Convert.ToString(busqueda)));
+                        }
+                    }
+                    catch
+                    {
+                        TempData["Error"] = "Favor ingrese numero de DPI válido";
+                    }
+                    break;
+                case "Nombre":
+                    try
+                    {
+                       for (int j=0; j <= contador; j++)
+                        {
+
+
+                            int cant = Singleton.Instance.repeatedNames.Find(h => h.value == busqueda).numberRepeats;
+
+                            for (int i = 0; i <= cant; i++)
+                            {
+                                if (i != 0)
+                                {
+                                    Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByName.Buscar(busqueda + i.ToString()));
+                                }
+                                else
+                                {
+                                    Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByName.Buscar(busqueda));
+                                }
+                            }
+                        }
+
+                    }
+                    catch
+                    {
+                        for (int j = 0; j <= contador; j++)
+                        {
+                            Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByName.Buscar(busqueda));
+                        }
+                    }
+                    break;
+                case "Apellido":
+                    try
+                    {
+                        for (int j = 0; j <= contador; j++)
+                        {
+                            int cant = Singleton.Instance.repeatedLastNames.Find(h => h.value == busqueda).numberRepeats;
+
+                            for (int i = 0; i <= cant; i++)
+                            {
+                                if (i != 0)
+                                {
+                                    Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByLastName.Buscar(busqueda + i.ToString()));
+                                }
+                                else
+                                {
+                                    Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByLastName.Buscar(busqueda));
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        for (int j = 0; j <= contador; j++)
+                        {
+                            Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByLastName.Buscar(busqueda));
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return View(Singleton.Instance.miBuqueda);
+        }
+
+
+
+
+
 
         #endregion
 

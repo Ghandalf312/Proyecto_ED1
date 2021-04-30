@@ -22,3 +22,19 @@
     </div>
 
 }
+
+<h1>Buscar paciente</h1>
+<hr />
+@using (Html.BeginForm("Busqueda", "Hospital", FormMethod.Post))
+{
+    <div class="row">
+        <input type="text" class="form-control" name="search" value="" placeholder="Buscar..." />
+        <select id="Select1" name="select">
+            <option>DPI</option>
+            <option>Nombre</option>
+            <option>Apellido</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>}
+@TempData["Error"]
+<hr />
