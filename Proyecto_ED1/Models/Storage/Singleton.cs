@@ -30,6 +30,7 @@ namespace Proyecto_ED1.Models.Storage
         public List<Hospital> Hospitals = new List<Hospital>();
         public List<PatientModel> miBuqueda = new List<PatientModel>();
         public List<PatientExtModel> Location  = new List<PatientExtModel>();
+        public List<PatientModel> Vacunados = new List<PatientModel>();
 
         public PriorityQueue<PatientExtModel> patientsH1 = new PriorityQueue<PatientExtModel>();
         public PriorityQueue<PatientExtModel> patientsH1Copy = new PriorityQueue<PatientExtModel>();

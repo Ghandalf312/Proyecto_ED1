@@ -62,8 +62,9 @@
                     @Html.DisplayFor(modelItem => item.Priority)
                 </td>
                 <td>
+
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="checkbox" name="checkbox" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
                             Vacunado
                         </label>
@@ -75,6 +76,27 @@
     </tbody>
 </table>
 
-<br>
-<button type="button" asp-area="" asp-controller="Hospital" asp-action="Index" class="btn btn-outline-danger">Regresar al menu</button>
-<button type="button" class="btn btn-outline-danger">Siguiente</button>
+
+<br />
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+    
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Hospital" asp-action="Index">Regresar a Hospitales</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Siguiente</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+@*<br>
+<button type="submit" asp-area="" asp-controller="Hospital" asp-action="Index" class="btn btn-primary">Regresar al menu</button>
+
+<a class="nav-link text-dark" asp-area="" asp-controller="Hospital" asp-action="Index">Hospitales</a>*@
+

@@ -493,7 +493,25 @@ namespace Proyecto_ED1.Controllers
         /// </summary>
         /// <param name="data"></param> representa el input que ingreso el usuario.
         /// <returns></returns>
-        public bool HasIncorrectCharacter(string data)
+        /// 
+
+        public void Vacunado(IFormCollection collection)
+        {
+            //Singleton.Instance.Vacunados.Clear();
+            bool x = Convert.ToBoolean(collection["checkbox"]);
+            if (x == true)
+            {
+                foreach (var item in Singleton.Instance.Location)
+                {
+                    Singleton.Instance.Vacunados.Add(item);
+                }
+
+            } else { }
+            Singleton.Instance.miBuqueda.Clear();
+            RedirectToAction("Hospitals1", "Hospital");
+        }
+
+            public bool HasIncorrectCharacter(string data)
         {
             try
             {
