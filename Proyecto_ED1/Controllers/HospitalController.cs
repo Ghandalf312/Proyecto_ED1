@@ -32,6 +32,12 @@ namespace Proyecto_ED1.Controllers
         {
             return View();
         }
+
+        public ActionResult Busqueda()
+        {
+            Singleton.Instance.miBuqueda.Clear();
+            return View();
+        }
         public ActionResult Hospital1()
         {
             Singleton.Instance.Location.Clear();
@@ -290,7 +296,86 @@ namespace Proyecto_ED1.Controllers
                     return RedirectToAction("Hospital3");
             }
             return View();
+
+
+
         }
+
+        [HttpPost]
+        public ActionResult Busqueda(IFormCollection collection)
+        {
+            var x = collection["select"];
+            var busqueda = collection["search"];
+            Singleton.Instance.miBuqueda.Clear();
+            switch (x)
+            {
+                case "DPI":
+                    try
+                    {
+                        Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByDPI.Buscar(Convert.ToString(busqueda)));
+
+                    }
+                    catch
+                    {
+                        TempData["Error"] = "Favor ingrese numero de DPI válido";
+                    }
+                    break;
+                case "Nombre":
+                    try
+                    {
+                        int cant = Singleton.Instance.repeatedNames.Find(h => h.value == busqueda).numberRepeats;
+
+                        for (int i = 0; i <= cant; i++)
+                        {
+                            if (i != 0)
+                            {
+                                Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByName.Buscar(busqueda + i.ToString()));
+                            }
+                            else
+                            {
+                                Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByName.Buscar(busqueda));
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByName.Buscar(busqueda));
+                    }
+                    break;
+                case "Apellido":
+                    try
+                    {
+                        int cant = Singleton.Instance.repeatedLastNames.Find(h => h.value == busqueda).numberRepeats;
+
+                        for (int i = 0; i <= cant; i++)
+                        {
+                            if (i != 0)
+                            {
+                                Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByLastName.Buscar(busqueda + i.ToString()));
+                            }
+                            else
+                            {
+                                Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByLastName.Buscar(busqueda));
+                            }
+                        }
+
+                    }
+                    catch
+                    {
+                        Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByLastName.Buscar(busqueda));
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return View(Singleton.Instance.miBuqueda);
+        }
+
+
+
+
+
+
         [HttpPost]
         public ActionResult Hospital1(IFormCollection collection)
         {
@@ -388,6 +473,24 @@ namespace Proyecto_ED1.Controllers
             }
             return null;
         }
+        public ActionResult ListaPersonas()
+        {
+            if (Singleton.Instance.miBuqueda.Count() == 0)
+            {
+                TempData["Vacio"] = "No se encontró a la persona solicitada";
+            }
+            return View(Singleton.Instance.miBuqueda);
+        }
+        public ActionResult DetailsBusc(String id)
+        {
+
+            return View(Singleton.Instance.patientsByDPI.Buscar(id));
+        }
+
+
+
+
+
         #endregion
     }
 

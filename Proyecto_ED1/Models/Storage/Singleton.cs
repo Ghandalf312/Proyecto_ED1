@@ -29,6 +29,9 @@ namespace Proyecto_ED1.Models.Storage
         public AVLTree<PatientModel, string> patientsByDPI = new AVLTree<PatientModel, string>();
         public List<Hospital> Hospitals = new List<Hospital>();
 
+        public List<PatientModel> miBuqueda = new List<PatientModel>();
+
+
         public List<PatientExtModel> Location  = new List<PatientExtModel>();
 
         public PriorityQueue<PatientExtModel> patientsH1 = new PriorityQueue<PatientExtModel>();
