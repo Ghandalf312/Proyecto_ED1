@@ -182,6 +182,7 @@ namespace Proyecto_ED1.Controllers
             return View(Singleton.Instance.Location);
         }
         #endregion
+
         #region Metodos HTTPOST
         [HttpPost]
         public ActionResult Index(IFormCollection collection)
@@ -327,7 +328,7 @@ namespace Proyecto_ED1.Controllers
             }
             catch
             {
-                ModelState.AddModelError("Municipality", "Por favor, asegurese de haber llenado todo los campos correctamente.");
+                ModelState.AddModelError("Name", "Por favor, asegurese de haber llenado todo los campos correctamente.");
             }
             return View();
         }
@@ -361,7 +362,6 @@ namespace Proyecto_ED1.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult Simulacion(IFormCollection collection)
         {
@@ -380,39 +380,49 @@ namespace Proyecto_ED1.Controllers
         [HttpPost]
         public ActionResult Hospital1s(IFormCollection collection)
         {
-
-            int Priority = 0;
-            var priority = collection["DPI"];
-            foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
+            var patient1 = collection["Patient 1"];
+            string patient = patient1.ToString();
+            if (patient != null)
             {
-                if (patient.Value.DPI == priority )
+                string patientDPI = patient.Substring(11, patient.Length - 11);
+                var patientValue = patient.Substring(0, 10);
+                if (patientValue == "Vaccinated")
                 {
-                    Singleton.Instance.Vacunados.Add(patient.Value);
+                    //agregar paciente a lista de vacunados
+                    //eliminar paciente de la cola de prioridad
+                    //eliminar paciente de los arboles
+                    //eliminar paciente de tabla hash
                 }
             }
-            int a=0;
-            //switch (priority)
-            //{
-            //    case "high":
-            //        Priority = 1;
-            //        break;
-            //    case "mid":
-            //        Priority = 2;
-            //        break;
-            //    case "low":
-            //        Priority = 3;
-            //        break;
-            //}
-
-
-
-            //RedirectToAction("Hospitals1", "Hospital");
-
-
-
-
-
-            return View();
+            var patient2 = collection["Patient 2"];
+            patient = patient2.ToString();
+            if (patient != null)
+            {
+                string patientDPI = patient.Substring(11, patient.Length - 11);
+                var patientValue = patient.Substring(0, 10);
+                if (patientValue == "Vaccinated")
+                {
+                    //agregar paciente a lista de vacunados
+                    //eliminar paciente de la cola de prioridad
+                    //eliminar paciente de los arboles
+                    //eliminar paciente de tabla hash
+                }
+            }
+            var patient3 = collection["Patient 3"];
+            patient = patient3.ToString();
+            if (patient != null)
+            {
+                string patientDPI = patient.Substring(11, patient.Length - 11);
+                var patientValue = patient.Substring(0, 10);
+                if (patientValue == "Vaccinated")
+                {
+                    //agregar paciente a lista de vacunados
+                    //eliminar paciente de la cola de prioridad
+                    //eliminar paciente de los arboles
+                    //eliminar paciente de tabla hash
+                }
+            }
+            return RedirectToAction();
         }
         [HttpPost]
         public ActionResult Hospital2s(IFormCollection collection)
@@ -424,8 +434,6 @@ namespace Proyecto_ED1.Controllers
         {
             return View();
         }
-
-
         [HttpPost]
         public ActionResult Busqueda(IFormCollection collection)
         {

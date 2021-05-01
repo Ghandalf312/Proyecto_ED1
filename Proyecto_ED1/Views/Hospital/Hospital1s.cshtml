@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Hospital1s";
 }
-
 <h1>Hospital1s</h1>
 
 <p>
@@ -39,7 +38,6 @@
     <tbody>
         @foreach (var item in Model)
         {
-
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -62,65 +60,49 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Priority)
                 </td>
-                <td>
-
-                    @*<div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="checkbox" name="checkbox" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Vacunado
-                            </label>
-                        </div>*@
-
-                </td>
             </tr>
         }
     </tbody>
 </table>
 
-    @foreach (var item in Model)
+@using (Html.BeginForm("Hospital1s", "Hospital", FormMethod.Post))
+{
+    var patientCount = 0;
+    foreach (var item in Model)
     {
-
-        <div class="form-group">
-            <label asp-for="@item.DPI" class="control-label"></label>
-            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                <div>
-                    @Html.RadioButton("item.DPI", "vacunado") Vacunado
-                </div>
-
-                <span asp-validation-for="@item.DPI" class="text-danger"></span>
-            </div>
-        </div>
- 
-    <div class="form-group">
-        <input type="submit" value="Hospital1s" class="btn btn-primary" />
+        patientCount++;
+        <br />
+        <td>
+            <input type="radio" value="Vaccinated @item.DPI" name="Patient @patientCount">Vacunado
+        </td>
+        <br />
+    }
+    <br />
+    <div style="text-align: left">
+        <button type="submit" value="Registro" name="Option" style="width:300px;height:30px">Iniciar Simulacion</button>
     </div>
 }
 
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
 
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Hospital" asp-action="Index">Regresar a Hospitales</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Ir al proceso de vacunación</a>
+                </li>
+            </ul>
 
-
-
-    <br />
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container">
-
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Hospital" asp-action="Index">Regresar a Hospitales</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Siguiente</a>
-                    </li>
-                </ul>
-
-            </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
 
-    @*<br>
-        <button type="submit" asp-area="" asp-controller="Hospital" asp-action="Index" class="btn btn-primary">Regresar al menu</button>
+@*<br>
+    <button type="submit" asp-area="" asp-controller="Hospital" asp-action="Index" class="btn btn-primary">Regresar al menu</button>
 
-        <a class="nav-link text-dark" asp-area="" asp-controller="Hospital" asp-action="Index">Hospitales</a>*@
+    <a class="nav-link text-dark" asp-area="" asp-controller="Hospital" asp-action="Index">Hospitales</a>*@
 

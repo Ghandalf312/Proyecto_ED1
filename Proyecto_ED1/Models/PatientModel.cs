@@ -27,6 +27,7 @@ namespace Proyecto_ED1.Models
         public int Age { get; set; }
         [Display(Name = "Prioridad")]
         public int Priority { get; set; }
+        public int patientRadioBCount { get; set; }
 
         public int CompareTo(PatientModel obj)
         {
