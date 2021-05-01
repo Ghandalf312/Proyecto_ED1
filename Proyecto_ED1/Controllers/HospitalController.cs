@@ -380,6 +380,38 @@ namespace Proyecto_ED1.Controllers
         [HttpPost]
         public ActionResult Hospital1s(IFormCollection collection)
         {
+
+            int Priority = 0;
+            var priority = collection["DPI"];
+            foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
+            {
+                if (patient.Value.DPI == priority )
+                {
+                    Singleton.Instance.Vacunados.Add(patient.Value);
+                }
+            }
+            int a=0;
+            //switch (priority)
+            //{
+            //    case "high":
+            //        Priority = 1;
+            //        break;
+            //    case "mid":
+            //        Priority = 2;
+            //        break;
+            //    case "low":
+            //        Priority = 3;
+            //        break;
+            //}
+
+
+
+            //RedirectToAction("Hospitals1", "Hospital");
+
+
+
+
+
             return View();
         }
         [HttpPost]
@@ -507,7 +539,7 @@ namespace Proyecto_ED1.Controllers
                 }
 
             } else { }
-            Singleton.Instance.miBuqueda.Clear();
+         
             RedirectToAction("Hospitals1", "Hospital");
         }
 
