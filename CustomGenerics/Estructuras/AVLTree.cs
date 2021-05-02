@@ -28,7 +28,6 @@ namespace CustomGenerics.Estructuras
             {
                 Delete(busc);
             }
-            // return deleted;
         }
         public T Buscar(K buscado)
         {

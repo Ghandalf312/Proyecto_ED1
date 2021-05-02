@@ -9,7 +9,7 @@ namespace CustomGenerics.Estructuras
     public class Node<T> : ICloneable
     {
         /// <summary>
-        /// Variable declaration.
+        /// Declaración de variables
         /// </summary>
         public Node<T> Father;
         public Node<T> RightSon;
@@ -19,7 +19,7 @@ namespace CustomGenerics.Estructuras
         public int Priority;
         public int AgePriority;
         /// <summary>
-        /// PQNode Constructor
+        /// Constructor
         /// </summary>
         /// <param name="key"></param>
         /// <param name="Date"></param>
@@ -33,7 +33,7 @@ namespace CustomGenerics.Estructuras
             Priority = priority;
         }
         /// <summary>
-        /// ICloneable implemetion clones the node
+        /// ICloneable implemetion
         /// </summary>
         public object Clone()
         {

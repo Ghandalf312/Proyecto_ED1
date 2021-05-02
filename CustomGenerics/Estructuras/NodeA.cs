@@ -10,6 +10,9 @@ namespace CustomGenerics.Estructuras
 {
     public class NodeA<T, K> where T : IComparable<T> where K : IComparable<K>
     {
+        /// <summary>
+        /// Declaración de variables
+        /// </summary>
         public NodeA<T, K> Izquierdo { get; set; }
         public NodeA<T, K> Derecho { get; set; }
         public T Valor { get; set; }

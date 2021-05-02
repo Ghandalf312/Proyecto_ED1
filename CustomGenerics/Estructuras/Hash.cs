@@ -14,15 +14,15 @@ namespace CustomGenerics.Estructuras
     public class Hash<T> where T : IComparable<T>
     {
         /// <summary>
-        /// Variable declaration
+        /// Declaración de variables
         /// </summary>
         public int Length;
         public HashNode<T>[] HashTable;
 
         /// <summary>
-        /// Constructor, stablishes the length of the array in the Hash
+        /// Constructor, establece el tamaño del arreglo en la hash
         /// </summary>
-        /// <param name="length"></param> Length wanted for the array
+        /// <param name="length"></param> Tamaño del arreglo
         public Hash(int length)
         {
             Length = length;
@@ -30,10 +30,10 @@ namespace CustomGenerics.Estructuras
         }
 
         /// <summary>
-        /// Inserts a new node into the hash.
+        /// Iserta un nuevo nodo en la tabla hash
         /// </summary>
-        /// <param name="InsertV"></param> The value of the node that is being inserted
-        /// <param name="key"></param> The key used to add into the Hash
+        /// <param name="InsertV"></param> El valor del nodo
+        /// <param name="key"></param> Llave utilizada para agregar a la tabla hash
         public void Insert(T InsertV, string key)
         {
             HashNode<T> T1 = new HashNode<T>();
@@ -56,11 +56,11 @@ namespace CustomGenerics.Estructuras
             }
         }
         /// <summary>
-        /// Second type of insert
+        /// Segundo tipo de inserción
         /// </summary>
-        /// <param name="InsertV"></param> Value of the new node.
-        /// <param name="key"></param> Key used to insert the new node.
-        /// <param name="multiplier"></param> Number used to establish the range used for the series .
+        /// <param name="InsertV"></param> Valor del nodo.
+        /// <param name="key"></param> Llave utilizada para insertar el nodo
+        /// <param name="multiplier"></param> Número utilizado para establecer el rango utilizado para la serie.
         public void Insert(T InsertV, string key, int multiplier)
         {
             HashNode<T> T1 = new HashNode<T>();
@@ -79,10 +79,6 @@ namespace CustomGenerics.Estructuras
                     else
                     {
                         code += 1;
-                        //if (code == Originalcode)
-                        //{
-                        //    avoid enqueue
-                        //}
                     }
                 }
                 if (HashTable[code] == null)
@@ -97,10 +93,10 @@ namespace CustomGenerics.Estructuras
         }
 
         /// <summary>
-        /// Function that searches an object in the hash
+        /// Función que busca un nodo en la tabla hash
         /// </summary>
-        /// <param name="searchedKey"></param> The key that it is needed to search the element.
-        /// <param name="multiplier"></param> Number used to establish the range used for the series.
+        /// <param name="searchedKey"></param> Llave utilizada para buscar el elemento.
+        /// <param name="multiplier"></param> Número utilizado para establecer el rango utilizado para la serie.
         /// <returns></returns>
         public HashNode<T> Search(string searchedKey, int multiplier)
         {
@@ -146,9 +142,9 @@ namespace CustomGenerics.Estructuras
         }
 
         /// <summary>
-        /// Second type to search
+        /// Otro tipo de buscar
         /// </summary>
-        /// <param name="searchedKey"></param> The key that it is needed to search.
+        /// <param name="searchedKey"></param> Llave que se quire buscar
         /// <returns></returns>
         public HashNode<T> Search(string searchedKey)
         {
@@ -185,24 +181,24 @@ namespace CustomGenerics.Estructuras
         }
 
         /// <summary>
-        /// Delete function
+        /// Función de elimnar
         /// </summary>
-        /// <param name="searchedKey"></param> The key that it is needed to search the element that it will be erased.
-        /// <param name="multiplier"></param> Number used to establish the range used for the series
+        /// <param name="searchedKey"></param> Llave necesaria para poder eliminar el nodo.
+        /// <param name="multiplier"></param> Número utilizado para establecer el rango utilizado para la serie.
         public void Delete(T value, string searchedKey, int multiplier)
         {
             int code = GetCode(value, searchedKey, multiplier);
+            bool found = false;
 
             while (HashTable[code] == null)
             {
                 code++;
             }
-
-            if (HashTable[code] != null)
+            while (found == false)
             {
-                if (HashTable[code].Key != searchedKey)
+                if (HashTable[code].Key != null)
                 {
-                    while (HashTable[code].Key != searchedKey)
+                    if (HashTable[code].Key != searchedKey)
                     {
                         if (code >= (multiplier + 1) * 1)
                         {
@@ -213,28 +209,29 @@ namespace CustomGenerics.Estructuras
                             code += 1;
                         }
                     }
-                    if (HashTable[code].Key == searchedKey)
+                    else
                     {
                         HashTable[code] = null;
+                        found = true;
                     }
                 }
                 else
                 {
-                    if (HashTable[code].Next != null)
+                    if (code >= (multiplier + 1) * 1)
                     {
-                        HashTable[code] = HashTable[code].Next;
+                        code = multiplier * 1;
                     }
                     else
                     {
-                        HashTable[code] = null;
+                        code += 1;
                     }
                 }
             }
         }
         /// <summary>
-        /// Get the code to insert the node in the hash
+        /// Consigue la posición para insertar el nodo a la tabla hash
         /// </summary>
-        /// <param name="Key"></param> The key that it will be used to get the code
+        /// <param name="Key"></param> Llave utilizada para conseguir la posición.
         /// <returns></returns>
         private int GetCode(string Key)
         {
@@ -249,10 +246,10 @@ namespace CustomGenerics.Estructuras
         }
 
         /// <summary>
-        /// Second get the code
+        /// Segunda versión de consguir la posición.
         /// </summary>
-        /// <param name="Key"></param> The key that it will be used to get the code
-        /// <param name="Multiplier"></param> Number used to establish the range used for the series
+        /// <param name="Key"></param> Llave utilizada para conseguir la posición.
+        /// <param name="Multiplier"></param> Número utilizado para establecer el rango utilizado para la serie
         private int GetCode(string Key, int Multiplier)
         {
             int code = Key.Length * 11 % (Multiplier * 10);
@@ -278,11 +275,12 @@ namespace CustomGenerics.Estructuras
         }
 
         /// <summary>
-        /// Looks up for the T value received and then returns its position in the array.
+        /// Consigue la posición para insertar el nodo a la tabla hash
         /// </summary>
-        /// <param name="value"></param> represents the searched value
-        /// <param name="Key"></param> represents the key that gives access to a position in the array in which the value should be.
-        /// <param name="Multiplier"></param> reduces the section in which the value is searched throughout the array.
+        /// <param name="value"></param> Es el valor buscado.
+        /// <param name="Key"></param> Representa la clave que da acceso a una posición en eñ arreglo en la que debería estar el valor.
+        /// <param name="Multiplier"></param> Reduce la sección en la que se busca el valor en toda la matriz.
+
         /// <returns></returns>
         private int GetCode(T value, string Key, int Multiplier)
         {
@@ -317,7 +315,7 @@ namespace CustomGenerics.Estructuras
 
 
         /// <summary>
-        /// Get a list of all nodes in the hash
+        /// Devuelve una lista de nodos de todo los elementos de la tabla hash.
         /// </summary>
         public List<HashNode<T>> GetAsNodes()
         {
@@ -333,41 +331,6 @@ namespace CustomGenerics.Estructuras
                 }
             }
             return returnList;
-        }
-
-        /// <summary>
-        /// Get a list of items that fulfill a condition
-        /// </summary>
-        /// <param name="predicate"></param> The condition to add to the list
-        /// <returns></returns>
-        public List<T> GetFilterList(Func<T, bool> predicate)
-        {
-            List<T> FiltedList = new List<T>();
-            var currentNode = new HashNode<T>();
-            foreach (var task in HashTable)
-            {
-                currentNode = task;
-                while (currentNode != null)
-                {
-                    if (predicate(currentNode.Value))
-                    {
-                        FiltedList.Add(currentNode.Value);
-                    }
-                    currentNode = currentNode.Next;
-                }
-            }
-            return FiltedList;
-        }
-
-        /// <summary>
-        /// Returns the value in the position given.
-        /// </summary>
-        /// <param name="pos"></param> int of the key position.
-        /// <param name="block"></param> int that represents the section of values which are going to be returned.
-        /// <returns></returns>
-        public HashNode<T> GetT(int pos, int block)
-        {
-            return HashTable[pos + block];
         }
     }
 }

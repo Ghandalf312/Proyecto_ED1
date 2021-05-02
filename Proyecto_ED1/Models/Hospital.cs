@@ -18,14 +18,15 @@ namespace Proyecto_ED1.Models
     {
 
         /// <summary>
-        /// Variable declaration
+        /// Declaración de variables
         /// </summary>
         [Display(Name = "Hospital")]
         public string HospitalName { get; set; }
         public List<string> Departments { get; set; }
- 
-        
 
+        /// <summary>
+        /// Procedimiento que le asigna los repectivos departamentos a cada hospital.
+        /// </summary>
         public void GetDepartments()
         {
             Departments = new List<string>();

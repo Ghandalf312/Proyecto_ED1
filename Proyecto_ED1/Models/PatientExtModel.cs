@@ -8,6 +8,9 @@ namespace Proyecto_ED1.Models
 {
     public class PatientExtModel : PatientModel
     {
+        /// <summary>
+        /// Declaración de variables
+        /// </summary>
         public string NameKey { get; set; }
         public string LastNameKey { get; set; }
         public string Hospital { get; set; }

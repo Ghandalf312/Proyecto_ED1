@@ -28,14 +28,12 @@ namespace Proyecto_ED1.Models
         [Display(Name = "Prioridad")]
         public int Priority { get; set; }
         public int patientRadioBCount { get; set; }
-
+        /// <summary>
+        /// IComparable implementation
+        /// </summary>
         public int CompareTo(PatientModel obj)
         {
             return Priority.CompareTo(obj.Priority);
         }
-
-
-
-       
     }
 }

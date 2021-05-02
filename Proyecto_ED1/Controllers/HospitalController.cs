@@ -840,12 +840,8 @@ namespace Proyecto_ED1.Controllers
 
         #region Metodos_ayuda
         /// <summary>
-        /// Si el string tiene un numero, retorna verdadero, si no, retorna falso.
+        /// Verifica que la persona esté vacunada
         /// </summary>
-        /// <param name="data"></param> representa el input que ingreso el usuario.
-        /// <returns></returns>
-        /// 
-
         public void Vacunado(IFormCollection collection)
         {
             //Singleton.Instance.Vacunados.Clear();
@@ -861,8 +857,10 @@ namespace Proyecto_ED1.Controllers
          
             RedirectToAction("Hospitals1", "Hospital");
         }
-
-            public bool HasIncorrectCharacter(string data)
+        /// <summary>
+        /// Si el string tiene un numero, retorna verdadero, si no, retorna falso.
+        /// </summary>
+        public bool HasIncorrectCharacter(string data)
         {
             try
             {
@@ -874,6 +872,9 @@ namespace Proyecto_ED1.Controllers
                 return false;
             }
         }
+        /// <summary>
+        /// Agrega los hospitales
+        /// </summary>
         private void LoadHospitalsByDepartment()
         {
             AddHospital("Alta Verapaz");
@@ -881,7 +882,9 @@ namespace Proyecto_ED1.Controllers
             AddHospital("Totonicapán");
 
         }
-
+        /// <summary>
+        /// Consigue l multiplicador para el rango de la tabla hash,con base al hospital ingresado
+        /// </summary>
         private int GetMultiplier(string hospital)
         {
             switch (hospital)
@@ -896,18 +899,21 @@ namespace Proyecto_ED1.Controllers
             }
             return -1;
         }
-
+        /// <summary>
+        /// Crea un nuevo hospital
+        /// </summary>
         private void AddHospital(string hospital)
         {
             var newHospital = new Hospital()
             {
                 HospitalName = hospital,
-            
             };
             newHospital.GetDepartments();
             Singleton.Instance.Hospitals.Add(newHospital);
         }
-
+        /// <summary>
+        /// Consigue el nombre del hospital con base al departamento que esté ubicado.
+        /// </summary>
         private string GetHospital(string department)
         {
             foreach (var hospital in Singleton.Instance.Hospitals)
