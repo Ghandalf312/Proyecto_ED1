@@ -15,6 +15,7 @@ namespace Proyecto_ED1.Controllers
     {
         public int contador =0;
         public static bool FirstTime = true;
+        public Node<PatientExtModel> Temp1;
         #region Metodos GET
         public ActionResult Index()
         {
@@ -33,6 +34,12 @@ namespace Proyecto_ED1.Controllers
         {
             return View();
         }
+
+        public ActionResult Vacunados()
+        {
+            return View(Singleton.Instance.Vacunados);
+        }
+
         public ActionResult Busqueda()
         {
             Singleton.Instance.miBuqueda.Clear();
@@ -196,6 +203,8 @@ namespace Proyecto_ED1.Controllers
                     return RedirectToAction("Espera");
                 case "Simulacion":
                     return RedirectToAction("Simulacion");
+                case "Vacunados":
+                    return RedirectToAction("Vacunados");
             }
             return View();
         }
@@ -204,6 +213,8 @@ namespace Proyecto_ED1.Controllers
         {
             try
             {
+                string a = collection["DPI"].ToString();
+                
                 if (HasIncorrectCharacter(collection["Name"]) || HasIncorrectCharacter(collection["LastName"]) || HasIncorrectCharacter(collection["Municipality"]))
                 {
                     ModelState.AddModelError("Name", "Por favor, ingrese datos no numericos en los campos pertenecientes.");
@@ -218,7 +229,12 @@ namespace Proyecto_ED1.Controllers
                 {
                     ModelState.AddModelError("Department", "Por favor seleccione un departamento");
                     return View("Registro");
+                }else if (a.Length != 13)
+                {
+                    ModelState.AddModelError("DPI", "Por favor introduzca un DPI/CUI válido (13 carácteres)");
+                    return View("Registro");
                 }
+              
                 foreach (var patient in Singleton.Instance.patientsHash.GetAsNodes())
                 {
                     if (patient.Value.DPI == collection["DPI"])
@@ -322,7 +338,8 @@ namespace Proyecto_ED1.Controllers
                     Singleton.Instance.patientsH3.AddPatient(newPatientModel.DPI, newPatientModel.Age, newPatientModel, newPatientModel.Priority);
                 }
                 Singleton.Instance.patientsByDPI.Add(newPatientModel, newPatientModel.DPI);
-                Singleton.Instance.patientsHash.Insert(newPatientModel, newPatientModel.DPI);
+                //
+                Singleton.Instance.patientsHash.Insert(newPatientModel, newPatientModel.DPI, GetMultiplier(newPatientModel.Hospital));
                 contador++;
                 return RedirectToAction("Index");
             }
@@ -380,28 +397,65 @@ namespace Proyecto_ED1.Controllers
         [HttpPost]
         public ActionResult Hospital1s(IFormCollection collection)
         {
+            Temp1 = Singleton.Instance.patientsH1.Root;
+            
             var patient1 = collection["Patient 1"];
             string patient = patient1.ToString();
-            if (patient != null)
+            if (patient != "")
             {
                 string patientDPI = patient.Substring(11, patient.Length - 11);
                 var patientValue = patient.Substring(0, 10);
                 if (patientValue == "Vaccinated")
                 {
+                    foreach (var patientV in Singleton.Instance.Location)
+                    {
+
+                        if (patientV.DPI.Equals(patientDPI))
+                        {
+                            Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.patientsByName.Remove(patientV.NameKey);
+                            Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
+                            Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
+                            Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
+                            Singleton.Instance.patientsH1.GetFirst();
+
+
+                        }
+                    }
                     //agregar paciente a lista de vacunados
                     //eliminar paciente de la cola de prioridad
                     //eliminar paciente de los arboles
                     //eliminar paciente de tabla hash
                 }
+                else
+                {
+
+                }
             }
             var patient2 = collection["Patient 2"];
-            patient = patient2.ToString();
-            if (patient != null)
+            String patient2V = patient2.ToString();
+            if (patient2V != "")
             {
-                string patientDPI = patient.Substring(11, patient.Length - 11);
-                var patientValue = patient.Substring(0, 10);
+                
+                string patientDPI = patient2V.Substring(11, patient2V.Length - 11);
+                var patientValue = patient2V.Substring(0, 10);
                 if (patientValue == "Vaccinated")
                 {
+                    foreach (var patientV in Singleton.Instance.Location)
+                    {
+
+                        if (patientV.DPI.Equals(patientDPI))
+                        {
+                            Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.patientsByName.Remove(patientV.NameKey);
+                            Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
+                            Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
+                            Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
+                            Singleton.Instance.patientsH1.GetFirst();
+
+
+                        }
+                    }
                     //agregar paciente a lista de vacunados
                     //eliminar paciente de la cola de prioridad
                     //eliminar paciente de los arboles
@@ -409,31 +463,55 @@ namespace Proyecto_ED1.Controllers
                 }
             }
             var patient3 = collection["Patient 3"];
-            patient = patient3.ToString();
-            if (patient != null)
+            String patient3V = patient3.ToString();
+            if (patient3V != "")
             {
-                string patientDPI = patient.Substring(11, patient.Length - 11);
-                var patientValue = patient.Substring(0, 10);
+                string patientDPI = patient3V.Substring(11, patient3V.Length - 11);
+                var patientValue = patient3V.Substring(0, 10);
                 if (patientValue == "Vaccinated")
                 {
+                    foreach (var patientV in Singleton.Instance.Location)
+                    {
+
+                        if (patientV.DPI.Equals(patientDPI))
+                        {
+                            Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.patientsByName.Remove(patientV.NameKey);
+                            Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
+                            Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
+                            Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
+                            Singleton.Instance.patientsH1.GetFirst();
+
+
+                        }
+                    }
                     //agregar paciente a lista de vacunados
                     //eliminar paciente de la cola de prioridad
                     //eliminar paciente de los arboles
                     //eliminar paciente de tabla hash
                 }
             }
-            return RedirectToAction();
+            return RedirectToAction("Index");
         }
-        [HttpPost]
-        public ActionResult Hospital2s(IFormCollection collection)
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Hospital3s(IFormCollection collection)
-        {
-            return View();
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
         [HttpPost]
         public ActionResult Busqueda(IFormCollection collection)
         {
@@ -520,8 +598,205 @@ namespace Proyecto_ED1.Controllers
             return View(Singleton.Instance.miBuqueda);
         }
 
+        [HttpPost]
+        public ActionResult Hospital2s(IFormCollection collection)
+        {
+            Temp1 = Singleton.Instance.patientsH1.Root;
+
+            var patient1 = collection["Patient 1"];
+            string patient = patient1.ToString();
+            if (patient != "")
+            {
+                string patientDPI = patient.Substring(11, patient.Length - 11);
+                var patientValue = patient.Substring(0, 10);
+                if (patientValue == "Vaccinated")
+                {
+                    foreach (var patientV in Singleton.Instance.Location)
+                    {
+
+                        if (patientV.DPI.Equals(patientDPI))
+                        {
+                            Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.patientsByName.Remove(patientV.NameKey);
+                            Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
+                            Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
+                            Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
+                            Singleton.Instance.patientsH1.GetFirst();
 
 
+                        }
+                    }
+                    //agregar paciente a lista de vacunados
+                    //eliminar paciente de la cola de prioridad
+                    //eliminar paciente de los arboles
+                    //eliminar paciente de tabla hash
+                }
+                else
+                {
+
+                }
+            }
+            var patient2 = collection["Patient 2"];
+            String patient2V = patient2.ToString();
+            if (patient2V != "")
+            {
+
+                string patientDPI = patient2V.Substring(11, patient2V.Length - 11);
+                var patientValue = patient2V.Substring(0, 10);
+                if (patientValue == "Vaccinated")
+                {
+                    foreach (var patientV in Singleton.Instance.Location)
+                    {
+
+                        if (patientV.DPI.Equals(patientDPI))
+                        {
+                            Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.patientsByName.Remove(patientV.NameKey);
+                            Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
+                            Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
+                            Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
+                            Singleton.Instance.patientsH1.GetFirst();
+
+
+                        }
+                    }
+                    //agregar paciente a lista de vacunados
+                    //eliminar paciente de la cola de prioridad
+                    //eliminar paciente de los arboles
+                    //eliminar paciente de tabla hash
+                }
+            }
+            var patient3 = collection["Patient 3"];
+            String patient3V = patient3.ToString();
+            if (patient3V != "")
+            {
+                string patientDPI = patient3V.Substring(11, patient3V.Length - 11);
+                var patientValue = patient3V.Substring(0, 10);
+                if (patientValue == "Vaccinated")
+                {
+                    foreach (var patientV in Singleton.Instance.Location)
+                    {
+
+                        if (patientV.DPI.Equals(patientDPI))
+                        {
+                            Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.patientsByName.Remove(patientV.NameKey);
+                            Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
+                            Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
+                            Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
+                            Singleton.Instance.patientsH1.GetFirst();
+
+
+                        }
+                    }
+                    //agregar paciente a lista de vacunados
+                    //eliminar paciente de la cola de prioridad
+                    //eliminar paciente de los arboles
+                    //eliminar paciente de tabla hash
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Hospital3s(IFormCollection collection)
+        {
+            Temp1 = Singleton.Instance.patientsH1.Root;
+
+            var patient1 = collection["Patient 1"];
+            string patient = patient1.ToString();
+            if (patient != "")
+            {
+                string patientDPI = patient.Substring(11, patient.Length - 11);
+                var patientValue = patient.Substring(0, 10);
+                if (patientValue == "Vaccinated")
+                {
+                    foreach (var patientV in Singleton.Instance.Location)
+                    {
+
+                        if (patientV.DPI.Equals(patientDPI))
+                        {
+                            Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.patientsByName.Remove(patientV.NameKey);
+                            Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
+                            Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
+                            Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
+                            Singleton.Instance.patientsH1.GetFirst();
+
+
+                        }
+                    }
+                    //agregar paciente a lista de vacunados
+                    //eliminar paciente de la cola de prioridad
+                    //eliminar paciente de los arboles
+                    //eliminar paciente de tabla hash
+                }
+                else
+                {
+
+                }
+            }
+            var patient2 = collection["Patient 2"];
+            String patient2V = patient2.ToString();
+            if (patient2V != "")
+            {
+
+                string patientDPI = patient2V.Substring(11, patient2V.Length - 11);
+                var patientValue = patient2V.Substring(0, 10);
+                if (patientValue == "Vaccinated")
+                {
+                    foreach (var patientV in Singleton.Instance.Location)
+                    {
+
+                        if (patientV.DPI.Equals(patientDPI))
+                        {
+                            Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.patientsByName.Remove(patientV.NameKey);
+                            Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
+                            Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
+                            Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
+                            Singleton.Instance.patientsH1.GetFirst();
+
+
+                        }
+                    }
+                    //agregar paciente a lista de vacunados
+                    //eliminar paciente de la cola de prioridad
+                    //eliminar paciente de los arboles
+                    //eliminar paciente de tabla hash
+                }
+            }
+            var patient3 = collection["Patient 3"];
+            String patient3V = patient3.ToString();
+            if (patient3V != "")
+            {
+                string patientDPI = patient3V.Substring(11, patient3V.Length - 11);
+                var patientValue = patient3V.Substring(0, 10);
+                if (patientValue == "Vaccinated")
+                {
+                    foreach (var patientV in Singleton.Instance.Location)
+                    {
+
+                        if (patientV.DPI.Equals(patientDPI))
+                        {
+                            Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.patientsByName.Remove(patientV.NameKey);
+                            Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
+                            Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
+                            Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
+                            Singleton.Instance.patientsH1.GetFirst();
+
+
+                        }
+                    }
+                    //agregar paciente a lista de vacunados
+                    //eliminar paciente de la cola de prioridad
+                    //eliminar paciente de los arboles
+                    //eliminar paciente de tabla hash
+                }
+            }
+            return RedirectToAction("Index");
+        }
 
 
 
@@ -571,12 +846,26 @@ namespace Proyecto_ED1.Controllers
 
         }
 
+        private int GetMultiplier(string hospital)
+        {
+            switch (hospital)
+            {
+                case "Alta Verapaz":
+                    return 1;
+                case "Guatemala":
+                    return 2;
+                case "Totonicapán":
+                    return 3;
+                
+            }
+            return -1;
+        }
+
         private void AddHospital(string hospital)
         {
             var newHospital = new Hospital()
             {
                 HospitalName = hospital,
-                PatientQueue = new PriorityQueue<PatientModel>(),
             
             };
             newHospital.GetDepartments();

@@ -16,7 +16,7 @@ namespace Proyecto_ED1.Models
         
         [Display(Name = "Apellido")]
         public string LastName { get; set; }
-        
+        [Display(Name = "DPI / CUI")]
         public string DPI { get; set; }
 
         [Display(Name = "Departamento")]

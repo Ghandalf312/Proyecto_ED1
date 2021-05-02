@@ -75,6 +75,25 @@
     </tbody>
 </table>
 
+@using (Html.BeginForm("Hospital2s", "Hospital", FormMethod.Post))
+{
+    var patientCount = 0;
+    foreach (var item in Model)
+    {
+        patientCount++;
+        <br />
+        <td>
+            <input type="radio" value="Vaccinated @item.DPI" name="Patient @patientCount">Vacunado
+        </td>
+        <br />
+    }
+    <br />
+    <div style="text-align: left">
+        <button type="submit" value="Registro" name="Option" style="width:300px;height:30px">Iniciar Simulacion</button>
+    </div>
+}
+
+
 
 <br />
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">

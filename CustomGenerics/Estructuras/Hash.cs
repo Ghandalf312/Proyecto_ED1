@@ -66,7 +66,7 @@ namespace CustomGenerics.Estructuras
             HashNode<T> T1 = new HashNode<T>();
             T1.Value = InsertV;
             T1.Key = key;
-            int Originalcode = GetCode(T1.Key, multiplier);
+            int Originalcode = GetCode(T1.Value ,T1.Key, multiplier);
             int code = Originalcode;
             if (HashTable[code] != null)
             {
@@ -204,9 +204,9 @@ namespace CustomGenerics.Estructuras
                 {
                     while (HashTable[code].Key != searchedKey)
                     {
-                        if (code >= (multiplier + 1) * 10)
+                        if (code >= (multiplier + 1) * 1)
                         {
-                            code = multiplier * 10;
+                            code = multiplier * 1;
                         }
                         else
                         {

@@ -23,14 +23,9 @@ namespace Proyecto_ED1.Models
         [Display(Name = "Hospital")]
         public string HospitalName { get; set; }
         public List<string> Departments { get; set; }
-        public PriorityQueue<PatientModel> PatientQueue { get; set; }
-        public List<PatientModel> VacunedList { get; set; }
-        public int attendPatients { get; set; }
+ 
+        
 
-        public Hospital()
-        {
-            attendPatients = 3;
-        }
         public void GetDepartments()
         {
             Departments = new List<string>();
@@ -68,12 +63,5 @@ namespace Proyecto_ED1.Models
             }
         }
 
-
-        public bool PatientQueueFull()
-        {
-            return PatientQueue.IsFull();
-        }
-
-        
     }
 }
