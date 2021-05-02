@@ -4,11 +4,9 @@
     ViewData["Title"] = "Hospital2s";
 }
 
-<h1>Hospital2s</h1>
+<h1>Bienvenido al Hospital Roosevelt</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -61,15 +59,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Priority)
                 </td>
-                <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="checkbox" name="checkbox" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Vacunado
-                        </label>
-                    </div>
-
-                </td>
+               
             </tr>
         }
     </tbody>
@@ -103,9 +93,6 @@
             <ul class="navbar-nav flex-grow-1">
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Hospital" asp-action="Index">Regresar a Hospitales</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Siguiente</a>
                 </li>
             </ul>
         </div>
