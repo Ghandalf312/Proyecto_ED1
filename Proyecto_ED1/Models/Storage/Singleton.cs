@@ -34,8 +34,9 @@ namespace Proyecto_ED1.Models.Storage
         public List<PatientModel> Vacunados = new List<PatientModel>();
 
         public PriorityQueue<PatientExtModel> patientsH1 = new PriorityQueue<PatientExtModel>();
-        public PriorityQueue<PatientExtModel> patientsH1Copy = new PriorityQueue<PatientExtModel>();
         public PriorityQueue<PatientExtModel> patientsH2 = new PriorityQueue<PatientExtModel>();
         public PriorityQueue<PatientExtModel> patientsH3 = new PriorityQueue<PatientExtModel>();
+
+        public Percentage vaccinatedPercentage = new Percentage();
     }
 }

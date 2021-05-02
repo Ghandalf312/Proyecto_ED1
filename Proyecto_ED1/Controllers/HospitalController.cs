@@ -16,6 +16,7 @@ namespace Proyecto_ED1.Controllers
         public int contador =0;
         public static bool FirstTime = true;
         public Node<PatientExtModel> Temp1;
+
         #region Metodos GET
         public ActionResult Index()
         {
@@ -188,6 +189,18 @@ namespace Proyecto_ED1.Controllers
             Singleton.Instance.Location.Sort();
             return View(Singleton.Instance.Location);
         }
+        public ActionResult Percentage()
+        {
+            Singleton.Instance.vaccinatedPercentage.GetPercentage();
+            if (Singleton.Instance.vaccinatedPercentage != null)
+            {
+                return View(Singleton.Instance.vaccinatedPercentage);
+            }
+            else
+            {
+                return View(new Percentage());
+            }
+        }
         #endregion
 
         #region Metodos HTTPOST
@@ -205,6 +218,8 @@ namespace Proyecto_ED1.Controllers
                     return RedirectToAction("Simulacion");
                 case "Vacunados":
                     return RedirectToAction("Vacunados");
+                case "Porcentaje":
+                    return RedirectToAction("Percentage");
             }
             return View();
         }
@@ -338,9 +353,9 @@ namespace Proyecto_ED1.Controllers
                     Singleton.Instance.patientsH3.AddPatient(newPatientModel.DPI, newPatientModel.Age, newPatientModel, newPatientModel.Priority);
                 }
                 Singleton.Instance.patientsByDPI.Add(newPatientModel, newPatientModel.DPI);
-                //
                 Singleton.Instance.patientsHash.Insert(newPatientModel, newPatientModel.DPI, GetMultiplier(newPatientModel.Hospital));
                 contador++;
+                Singleton.Instance.vaccinatedPercentage.NotVaccinated++;
                 return RedirectToAction("Index");
             }
             catch
@@ -413,6 +428,8 @@ namespace Proyecto_ED1.Controllers
                         if (patientV.DPI.Equals(patientDPI))
                         {
                             Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.vaccinatedPercentage.Vaccinated++;
+                            Singleton.Instance.vaccinatedPercentage.NotVaccinated--;
                             Singleton.Instance.patientsByName.Remove(patientV.NameKey);
                             Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
                             Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
@@ -422,14 +439,6 @@ namespace Proyecto_ED1.Controllers
 
                         }
                     }
-                    //agregar paciente a lista de vacunados
-                    //eliminar paciente de la cola de prioridad
-                    //eliminar paciente de los arboles
-                    //eliminar paciente de tabla hash
-                }
-                else
-                {
-
                 }
             }
             var patient2 = collection["Patient 2"];
@@ -447,6 +456,8 @@ namespace Proyecto_ED1.Controllers
                         if (patientV.DPI.Equals(patientDPI))
                         {
                             Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.vaccinatedPercentage.Vaccinated++;
+                            Singleton.Instance.vaccinatedPercentage.NotVaccinated--;
                             Singleton.Instance.patientsByName.Remove(patientV.NameKey);
                             Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
                             Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
@@ -456,10 +467,6 @@ namespace Proyecto_ED1.Controllers
 
                         }
                     }
-                    //agregar paciente a lista de vacunados
-                    //eliminar paciente de la cola de prioridad
-                    //eliminar paciente de los arboles
-                    //eliminar paciente de tabla hash
                 }
             }
             var patient3 = collection["Patient 3"];
@@ -476,6 +483,8 @@ namespace Proyecto_ED1.Controllers
                         if (patientV.DPI.Equals(patientDPI))
                         {
                             Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.vaccinatedPercentage.Vaccinated++;
+                            Singleton.Instance.vaccinatedPercentage.NotVaccinated--;
                             Singleton.Instance.patientsByName.Remove(patientV.NameKey);
                             Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
                             Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
@@ -485,33 +494,10 @@ namespace Proyecto_ED1.Controllers
 
                         }
                     }
-                    //agregar paciente a lista de vacunados
-                    //eliminar paciente de la cola de prioridad
-                    //eliminar paciente de los arboles
-                    //eliminar paciente de tabla hash
                 }
             }
             return RedirectToAction("Index");
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
         [HttpPost]
         public ActionResult Busqueda(IFormCollection collection)
         {
@@ -617,19 +603,19 @@ namespace Proyecto_ED1.Controllers
                         if (patientV.DPI.Equals(patientDPI))
                         {
                             Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.vaccinatedPercentage.Vaccinated++;
+                            Singleton.Instance.vaccinatedPercentage.NotVaccinated--;
+                            Singleton.Instance.vaccinatedPercentage.Vaccinated++;
+                            Singleton.Instance.vaccinatedPercentage.NotVaccinated--;
                             Singleton.Instance.patientsByName.Remove(patientV.NameKey);
                             Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
                             Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
                             Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
-                            Singleton.Instance.patientsH1.GetFirst();
+                            Singleton.Instance.patientsH2.GetFirst();
 
 
                         }
                     }
-                    //agregar paciente a lista de vacunados
-                    //eliminar paciente de la cola de prioridad
-                    //eliminar paciente de los arboles
-                    //eliminar paciente de tabla hash
                 }
                 else
                 {
@@ -651,19 +637,17 @@ namespace Proyecto_ED1.Controllers
                         if (patientV.DPI.Equals(patientDPI))
                         {
                             Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.vaccinatedPercentage.Vaccinated++;
+                            Singleton.Instance.vaccinatedPercentage.NotVaccinated--;
                             Singleton.Instance.patientsByName.Remove(patientV.NameKey);
                             Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
                             Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
                             Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
-                            Singleton.Instance.patientsH1.GetFirst();
+                            Singleton.Instance.patientsH2.GetFirst();
 
 
                         }
                     }
-                    //agregar paciente a lista de vacunados
-                    //eliminar paciente de la cola de prioridad
-                    //eliminar paciente de los arboles
-                    //eliminar paciente de tabla hash
                 }
             }
             var patient3 = collection["Patient 3"];
@@ -680,19 +664,17 @@ namespace Proyecto_ED1.Controllers
                         if (patientV.DPI.Equals(patientDPI))
                         {
                             Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.vaccinatedPercentage.Vaccinated++;
+                            Singleton.Instance.vaccinatedPercentage.NotVaccinated--;
                             Singleton.Instance.patientsByName.Remove(patientV.NameKey);
                             Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
                             Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
                             Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
-                            Singleton.Instance.patientsH1.GetFirst();
+                            Singleton.Instance.patientsH2.GetFirst();
 
 
                         }
                     }
-                    //agregar paciente a lista de vacunados
-                    //eliminar paciente de la cola de prioridad
-                    //eliminar paciente de los arboles
-                    //eliminar paciente de tabla hash
                 }
             }
             return RedirectToAction("Index");
@@ -717,19 +699,17 @@ namespace Proyecto_ED1.Controllers
                         if (patientV.DPI.Equals(patientDPI))
                         {
                             Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.vaccinatedPercentage.Vaccinated++;
+                            Singleton.Instance.vaccinatedPercentage.NotVaccinated--;
                             Singleton.Instance.patientsByName.Remove(patientV.NameKey);
                             Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
                             Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
                             Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
-                            Singleton.Instance.patientsH1.GetFirst();
+                            Singleton.Instance.patientsH3.GetFirst();
 
 
                         }
                     }
-                    //agregar paciente a lista de vacunados
-                    //eliminar paciente de la cola de prioridad
-                    //eliminar paciente de los arboles
-                    //eliminar paciente de tabla hash
                 }
                 else
                 {
@@ -751,19 +731,17 @@ namespace Proyecto_ED1.Controllers
                         if (patientV.DPI.Equals(patientDPI))
                         {
                             Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.vaccinatedPercentage.Vaccinated++;
+                            Singleton.Instance.vaccinatedPercentage.NotVaccinated--;
                             Singleton.Instance.patientsByName.Remove(patientV.NameKey);
                             Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
                             Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
                             Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
-                            Singleton.Instance.patientsH1.GetFirst();
+                            Singleton.Instance.patientsH3.GetFirst();
 
 
                         }
                     }
-                    //agregar paciente a lista de vacunados
-                    //eliminar paciente de la cola de prioridad
-                    //eliminar paciente de los arboles
-                    //eliminar paciente de tabla hash
                 }
             }
             var patient3 = collection["Patient 3"];
@@ -780,25 +758,21 @@ namespace Proyecto_ED1.Controllers
                         if (patientV.DPI.Equals(patientDPI))
                         {
                             Singleton.Instance.Vacunados.Add(patientV);
+                            Singleton.Instance.vaccinatedPercentage.Vaccinated++;
+                            Singleton.Instance.vaccinatedPercentage.NotVaccinated--;
                             Singleton.Instance.patientsByName.Remove(patientV.NameKey);
                             Singleton.Instance.patientsByLastName.Remove(patientV.LastNameKey);
                             Singleton.Instance.patientsByDPI.Remove(patientV.DPI);
                             Singleton.Instance.patientsHash.Delete(patientV, patientV.DPI, GetMultiplier(patientV.Hospital));
-                            Singleton.Instance.patientsH1.GetFirst();
+                            Singleton.Instance.patientsH3.GetFirst();
 
 
                         }
                     }
-                    //agregar paciente a lista de vacunados
-                    //eliminar paciente de la cola de prioridad
-                    //eliminar paciente de los arboles
-                    //eliminar paciente de tabla hash
                 }
             }
             return RedirectToAction("Index");
         }
-
-
 
         #endregion
 
