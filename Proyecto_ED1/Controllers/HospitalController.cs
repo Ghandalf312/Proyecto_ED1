@@ -591,61 +591,6 @@ namespace Proyecto_ED1.Controllers
             return View(Singleton.Instance.miBuqueda);
         }
 
-        //[HttpPost]
-        //public ActionResult BusquedaVacunados(IFormCollection collection)
-        //{
-        //    var x = collection["select"];
-        //    var busqueda = collection["search"];
-        //    Singleton.Instance.miBuquedaVacunados.Clear();
-        //    switch (x)
-        //    {
-        //        case "Nombre":
-        //            try
-        //            {
-        //                for (int j = 0; j <= contador; j++)
-        //                {
-
-
-        //                    int cant = Singleton.Instance.repeatedNames.Find(h => h.value == busqueda).numberRepeats;
-
-        //                    for (int i = 0; i <= cant; i++)
-        //                    {
-        //                        if (i != 0)
-        //                        {
-        //                            Singleton.Instance.miBuquedaVacunados.Add(Singleton.Instance.patientsByName.Buscar(busqueda + i.ToString()));
-        //                        }
-        //                        else
-        //                        {
-        //                            Singleton.Instance.miBuquedaVacunados.Add(Singleton.Instance.patientsByName.Buscar(busqueda));
-        //                        }
-        //                    }
-        //                }
-
-        //            }
-        //            catch
-        //            {
-        //                for (int j = 0; j <= contador; j++)
-        //                {
-        //                    Singleton.Instance.miBuqueda.Add(Singleton.Instance.patientsByName.Buscar(busqueda));
-        //                }
-        //            }
-        //            break;
-        //    }
-        //    return View(Singleton.Instance.miBuqueda);
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
         [HttpPost]
         public ActionResult Hospital2s(IFormCollection collection)
         {
